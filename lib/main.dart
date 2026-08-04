@@ -8,7 +8,7 @@ import 'shared/theme/app_theme.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // TODO(Phase 4): await dotenv.load(fileName: '.env', isOptional: true);
-  // await configureDependencies();
+  await configureDependencies();
   runApp(const ProviderScope(child: PitboxWallApp()));
 }
 
