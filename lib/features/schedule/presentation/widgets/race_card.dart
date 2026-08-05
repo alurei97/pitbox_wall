@@ -41,7 +41,7 @@ class RaceCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(
-                    width: MediaQuery.sizeOf(context).width * 0.1,
+                    width: MediaQuery.sizeOf(context).width * 0.12,
                     child: Text(
                       _dateLabel(race),
                       textAlign: TextAlign.left,
@@ -66,6 +66,8 @@ class RaceCard extends StatelessWidget {
                       ),
                     ],
                   ),
+
+                  const SizedBox(width: 10),
 
                   Expanded(
                     child: Column(
