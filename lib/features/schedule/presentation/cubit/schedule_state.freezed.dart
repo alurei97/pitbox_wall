@@ -129,12 +129,12 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( List<Race> races,  bool fromCache)?  loaded,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( List<Race> races,  CacheInfo cache)?  loaded,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
 return loading();case _Loaded() when loaded != null:
-return loaded(_that.races,_that.fromCache);case _Error() when error != null:
+return loaded(_that.races,_that.cache);case _Error() when error != null:
 return error(_that.message);case _:
   return orElse();
 
@@ -153,12 +153,12 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( List<Race> races,  bool fromCache)  loaded,required TResult Function( String message)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( List<Race> races,  CacheInfo cache)  loaded,required TResult Function( String message)  error,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case _Loading():
 return loading();case _Loaded():
-return loaded(_that.races,_that.fromCache);case _Error():
+return loaded(_that.races,_that.cache);case _Error():
 return error(_that.message);case _:
   throw StateError('Unexpected subclass');
 
@@ -176,12 +176,12 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( List<Race> races,  bool fromCache)?  loaded,TResult? Function( String message)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( List<Race> races,  CacheInfo cache)?  loaded,TResult? Function( String message)?  error,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
 return loading();case _Loaded() when loaded != null:
-return loaded(_that.races,_that.fromCache);case _Error() when error != null:
+return loaded(_that.races,_that.cache);case _Error() when error != null:
 return error(_that.message);case _:
   return null;
 
@@ -258,7 +258,7 @@ String toString() {
 
 
 class _Loaded implements ScheduleState {
-  const _Loaded({required  List<Race> races, required this.fromCache}): _races = races;
+  const _Loaded({required  List<Race> races, required this.cache}): _races = races;
   
 
  final  List<Race> _races;
@@ -268,7 +268,7 @@ class _Loaded implements ScheduleState {
   return EqualUnmodifiableListView(_races);
 }
 
- final  bool fromCache;
+ final  CacheInfo cache;
 
 /// Create a copy of ScheduleState
 /// with the given fields replaced by the non-null parameter values.
@@ -280,16 +280,16 @@ _$LoadedCopyWith<_Loaded> get copyWith => __$LoadedCopyWithImpl<_Loaded>(this, _
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Loaded&&const DeepCollectionEquality().equals(other._races, _races)&&(identical(other.fromCache, fromCache) || other.fromCache == fromCache));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Loaded&&const DeepCollectionEquality().equals(other._races, _races)&&(identical(other.cache, cache) || other.cache == cache));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_races),fromCache);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_races),cache);
 
 @override
 String toString() {
-  return 'ScheduleState.loaded(races: $races, fromCache: $fromCache)';
+  return 'ScheduleState.loaded(races: $races, cache: $cache)';
 }
 
 
@@ -300,7 +300,7 @@ abstract mixin class _$LoadedCopyWith<$Res> implements $ScheduleStateCopyWith<$R
   factory _$LoadedCopyWith(_Loaded value, $Res Function(_Loaded) _then) = __$LoadedCopyWithImpl;
 @useResult
 $Res call({
- List<Race> races, bool fromCache
+ List<Race> races, CacheInfo cache
 });
 
 
@@ -317,11 +317,11 @@ class __$LoadedCopyWithImpl<$Res>
 
 /// Create a copy of ScheduleState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? races = null,Object? fromCache = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? races = null,Object? cache = null,}) {
   return _then(_Loaded(
 races: null == races ? _self._races : races // ignore: cast_nullable_to_non_nullable
-as List<Race>,fromCache: null == fromCache ? _self.fromCache : fromCache // ignore: cast_nullable_to_non_nullable
-as bool,
+as List<Race>,cache: null == cache ? _self.cache : cache // ignore: cast_nullable_to_non_nullable
+as CacheInfo,
   ));
 }
 

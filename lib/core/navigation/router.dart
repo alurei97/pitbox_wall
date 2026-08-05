@@ -5,6 +5,7 @@ import '../../features/ai_assistant/presentation/pages/ai_page.dart';
 import '../../features/driver/presentation/pages/driver_card_page.dart';
 import '../../features/home/presentation/pages/home_page.dart';
 import '../../features/results/presentation/pages/race_weekend_page.dart';
+import '../../features/schedule/domain/entities/race.dart';
 import '../../features/schedule/presentation/pages/schedule_page.dart';
 import '../../features/standings/presentation/pages/standings_page.dart';
 import '../../shared/widgets/app_scaffold.dart';
@@ -43,7 +44,10 @@ final router = GoRouter(
     // Detail routes OUTSIDE the shell → bottom nav not rendered.
     GoRoute(
       path: '/race/:round',
-      builder: (_, state) => RaceWeekendPage(round: state.pathParameters['round']!),
+      builder: (_, state) => RaceWeekendPage(
+        round: state.pathParameters['round']!,
+        race: state.extra as Race?,
+      ),
     ),
     GoRoute(
       path: '/driver/:id',
