@@ -7,6 +7,7 @@ import '../../features/schedule/data/datasources/schedule_remote_data_source.dar
 import '../../features/schedule/data/repositories/schedule_repository_impl.dart';
 import '../../features/schedule/domain/repositories/schedule_repository.dart';
 import '../../features/schedule/presentation/cubit/schedule_cubit.dart';
+import '../../features/home/presentation/cubit/home_cubit.dart';
 
 final getIt = GetIt.instance;
 
@@ -41,5 +42,10 @@ Future<void> configureDependencies() async {
   );
   getIt.registerFactory<ScheduleCubit>(
     () => ScheduleCubit(getIt<ScheduleRepository>()),
+  );
+
+  // Home feature
+  getIt.registerFactory<HomeCubit>(
+    () => HomeCubit(getIt<ScheduleRepository>()),
   );
 }

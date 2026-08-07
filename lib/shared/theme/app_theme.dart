@@ -23,7 +23,7 @@ class AppTheme {
       titleMedium: GoogleFonts.titilliumWeb(color: Colors.white, fontWeight: FontWeight.w600),
       bodySmall: GoogleFonts.titilliumWeb(color: const Color(0xFF888888), fontSize: 12),
       // Monospace for lap times / countdowns
-      labelSmall: GoogleFonts.robotoMono(color: const Color(0xFFAAAAAA), fontSize: 11),
+      labelSmall: GoogleFonts.jetBrainsMono(color: const Color(0xFFAAAAAA), fontSize: 11),
     ),
     appBarTheme: const AppBarTheme(
       backgroundColor: _bg,

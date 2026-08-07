@@ -108,17 +108,14 @@ class _ScheduleLoadedViewState extends State<ScheduleLoadedView> {
 
     return Column(
       children: [
-        // ── Fixed at the top ──
+        // ── Season header ──
         Padding(
           padding: const .symmetric(horizontal: 16),
           child: Align(
             alignment: .centerLeft,
             child: Text(
               '$seasonYear Season',
-              style: const TextStyle(
-                fontSize: 30,
-                fontWeight: .w800,
-              ),
+              style: theme.textTheme.headlineLarge,
             ),
           ),
         ),

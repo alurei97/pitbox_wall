@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import '../../domain/entities/race.dart';
 
 // ---------------------------------------------------------------------------
@@ -6,8 +8,9 @@ import '../../domain/entities/race.dart';
 
 /// Which badge (if any) a race card shows, relative to "now".
 enum ListChip {
-  done,
-  next('Next', 'E5484D');
+  done('', ''),
+  next('Next', 'E8002D'),
+  raceWeek("IT'S WACE REEK", 'FFFFFF');
 
   const ListChip([this.label, this.hexColor]);
 
@@ -36,4 +39,39 @@ Map<int, ListChip?> chipsFor(List<Race> races, DateTime now) {
     }
   }
   return map;
+}
+
+// ---------------------------------------------------------------------------
+// Status chip widget
+// ---------------------------------------------------------------------------
+
+/// Small rounded status badge driven by [ListChip].
+class StatusChip extends StatelessWidget {
+  const StatusChip({required this.chip, super.key});
+
+  final ListChip chip;
+
+  @override
+  Widget build(BuildContext context) {
+    if (chip == ListChip.done) {
+      return const Text('🏁', style: TextStyle(fontSize: 14));
+    }
+
+    final color = Color(int.parse('FF${chip.hexColor}', radix: 16));
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.15),
+        borderRadius: BorderRadius.circular(999),
+      ),
+      child: Text(
+        chip.label!,
+        style: TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.w700,
+          color: color,
+        ),
+      ),
+    );
+  }
 }

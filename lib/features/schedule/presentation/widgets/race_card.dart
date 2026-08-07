@@ -29,16 +29,16 @@ class RaceCard extends StatelessWidget {
     final flag = flagEmojiForCountry(race.country);
 
     return Padding(
-      padding: EdgeInsets.only(bottom: showDivider ? 0 : 8),
+      padding: .only(bottom: showDivider ? 0 : 8),
       child: Column(
         children: [
           GestureDetector(
-            behavior: HitTestBehavior.opaque,
+            behavior: .opaque,
             onTap: onTap,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 12),
+              padding: const .symmetric(horizontal: 2, vertical: 12),
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: .center,
                 children: [
                   SizedBox(
                     width: MediaQuery.sizeOf(context).width * 0.12,
@@ -71,15 +71,15 @@ class RaceCard extends StatelessWidget {
 
                   Expanded(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: .start,
                       children: [
                         Text(
                           race.raceName,
                           style: theme.textTheme.bodyLarge?.copyWith(
-                            fontWeight: FontWeight.w600,
+                            fontWeight: .w600,
                           ),
                           maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
+                          overflow: .ellipsis,
                         ),
                         Text(
                           race.circuitName,
@@ -87,7 +87,7 @@ class RaceCard extends StatelessWidget {
                             color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
                           ),
                           maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
+                          overflow: .ellipsis,
                         ),
                       ],
                     ),
@@ -103,7 +103,7 @@ class RaceCard extends StatelessWidget {
 
           if (showDivider)
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 0),
+              padding: const .symmetric(horizontal: 0),
               child: Divider(
                 height: 4,
                 thickness: 1,
@@ -120,40 +120,5 @@ class RaceCard extends StatelessWidget {
     final raceLocal = r.raceDateTime.toLocal();
     final month = monthNames[raceLocal.month - 1].substring(0, 3);
     return '${local.day}-${raceLocal.day}\n$month';
-  }
-}
-
-// ---------------------------------------------------------------------------
-// Status chip
-// ---------------------------------------------------------------------------
-
-/// Small rounded status badge shown on each race card.
-class StatusChip extends StatelessWidget {
-  const StatusChip({required this.chip, super.key});
-
-  final ListChip chip;
-
-  @override
-  Widget build(BuildContext context) {
-    if (chip == ListChip.done) {
-      return const Text('🏁', style: TextStyle(fontSize: 14));
-    }
-
-    final color = Color(int.parse('FF${chip.hexColor}', radix: 16));
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-      decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.15),
-        borderRadius: BorderRadius.circular(999),
-      ),
-      child: Text(
-        chip.label!,
-        style: TextStyle(
-          fontSize: 12,
-          fontWeight: FontWeight.w700,
-          color: color,
-        ),
-      ),
-    );
   }
 }

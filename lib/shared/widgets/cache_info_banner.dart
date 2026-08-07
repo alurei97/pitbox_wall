@@ -34,7 +34,7 @@ class CacheInfoBanner extends StatelessWidget {
                 fontSize: 11,
                 fontWeight: FontWeight.w600,
                 color: color,
-                fontFamily: 'RobotoMono',
+                fontFamily: 'JetBrainsMono',
               ),
             ),
           ),
