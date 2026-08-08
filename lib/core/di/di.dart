@@ -8,6 +8,10 @@ import '../../features/schedule/data/repositories/schedule_repository_impl.dart'
 import '../../features/schedule/domain/repositories/schedule_repository.dart';
 import '../../features/schedule/presentation/cubit/schedule_cubit.dart';
 import '../../features/home/presentation/cubit/home_cubit.dart';
+import '../../features/standings/data/datasources/standings_remote_data_source.dart';
+import '../../features/standings/data/repositories/standings_repository_impl.dart';
+import '../../features/standings/domain/repositories/standings_repository.dart';
+import '../../features/standings/presentation/cubit/standings_cubit.dart';
 
 final getIt = GetIt.instance;
 
@@ -47,5 +51,21 @@ Future<void> configureDependencies() async {
   // Home feature
   getIt.registerFactory<HomeCubit>(
     () => HomeCubit(getIt<ScheduleRepository>()),
+  );
+
+  // Standings feature
+  getIt.registerLazySingleton<StandingsRemoteDataSource>(
+    () => StandingsRemoteDataSource(
+      getIt<Dio>(instanceName: DioFactory.jolpicaName),
+    ),
+  );
+  getIt.registerLazySingleton<StandingsRepository>(
+    () => StandingsRepositoryImpl(
+      getIt<StandingsRemoteDataSource>(),
+      getIt<AppDatabase>(),
+    ),
+  );
+  getIt.registerFactory<StandingsCubit>(
+    () => StandingsCubit(getIt<StandingsRepository>()),
   );
 }
