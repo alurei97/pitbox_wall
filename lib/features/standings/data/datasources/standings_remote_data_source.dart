@@ -46,7 +46,11 @@ class StandingsRemoteDataSource {
         ? constructors.first as Map<String, dynamic>?
         : null;
 
-    if (position == null || points == null || wins == null || driver == null || constructor == null) {
+    if (position == null ||
+        points == null ||
+        wins == null ||
+        driver == null ||
+        constructor == null) {
       return null;
     }
 

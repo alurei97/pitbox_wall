@@ -4,18 +4,24 @@ import '../../../../core/error/either.dart';
 import '../../../../shared/models/cache_info.dart';
 import '../../../schedule/domain/entities/race.dart';
 import '../../../schedule/domain/repositories/schedule_repository.dart';
+import '../../../standings/domain/entities/driver_standing.dart';
+import '../../../standings/domain/repositories/standings_repository.dart';
 import 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
-  HomeCubit(this._repository) : super(const HomeState.initial());
+  HomeCubit(
+    this._scheduleRepository,
+    this._standingsRepository,
+  ) : super(const HomeState.initial());
 
-  final ScheduleRepository _repository;
+  final ScheduleRepository _scheduleRepository;
+  final StandingsRepository _standingsRepository;
 
   Future<void> load({bool forceRefresh = false}) async {
     emit(const HomeState.loading());
 
     final sw = Stopwatch()..start();
-    final result = await _repository.getSeasonSchedule(forceRefresh: forceRefresh);
+    final result = await _scheduleRepository.getSeasonSchedule(forceRefresh: forceRefresh);
     sw.stop();
 
     switch (result) {
@@ -27,6 +33,17 @@ class HomeCubit extends Cubit<HomeState> {
         final races = scheduleResult.races;
         final nextRace = _findNextRace(races, now);
         final sessions = _buildSessions(nextRace, now);
+
+        // Fetch standings non-blocking — top 5 drivers for home preview.
+        final standingsResult = await _standingsRepository.getCurrentStandings();
+        final topDrivers = switch (standingsResult) {
+          Right(value: final sr) => sr.driverStandings.take(5).toList(growable: false),
+          _ => <DriverStanding>[],
+        };
+        final standingsCache = switch (standingsResult) {
+          Right(value: final sr) => sr.cache,
+          _ => null,
+        };
 
         final old = scheduleResult.cache;
         emit(
@@ -42,6 +59,8 @@ class HomeCubit extends Cubit<HomeState> {
                 fetchedAt: old.fetchedAt,
                 ttlSeconds: old.ttlSeconds,
               ),
+              topDrivers: topDrivers,
+              standingsCache: standingsCache,
             ),
           ),
         );

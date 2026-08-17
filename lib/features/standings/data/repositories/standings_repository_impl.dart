@@ -75,7 +75,9 @@ class StandingsRepositoryImpl implements StandingsRepository {
       if (e.response?.statusCode == 429) {
         return _staleOrFailure(const RateLimitFailure('Rate limited by Jolpica (429).'));
       }
-      return _staleOrFailure(NetworkFailure(e.message ?? 'Network error while fetching standings.'));
+      return _staleOrFailure(
+        NetworkFailure(e.message ?? 'Network error while fetching standings.'),
+      );
     } catch (e) {
       return _staleOrFailure(UnknownFailure('Unexpected standings error: $e'));
     }

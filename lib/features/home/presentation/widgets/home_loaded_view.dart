@@ -4,6 +4,7 @@ import '../../../../shared/widgets/cache_info_banner.dart';
 import '../cubit/home_state.dart';
 import 'next_race_hero_card.dart';
 import 'race_week_badge.dart';
+import 'top_drivers_card.dart';
 
 /// Next race card, session countdown, season stats.
 class HomeLoadedView extends StatelessWidget {
@@ -54,7 +55,9 @@ class HomeLoadedView extends StatelessWidget {
             ],
           ),
         ),
-        CacheInfoBanner(cache: data.cache),
+        CacheInfoBanner(cache: data.cache, label: 'SCHEDULE'),
+        if (data.standingsCache != null)
+          CacheInfoBanner(cache: data.standingsCache!, label: 'STANDINGS'),
 
         // ── All-done message ──
         if (nextRace == null)
@@ -83,9 +86,14 @@ class HomeLoadedView extends StatelessWidget {
           ),
         ],
 
-        const Text(
-          'TODO(phase-3): Season stats — top 3 drivers + constructors by points, and last race result summary (podium + fastest lap).',
-        ),
+        // ── Top 5 drivers ──
+        if (data.topDrivers.isNotEmpty) ...[
+          const SizedBox(height: 24),
+          Padding(
+            padding: const .symmetric(horizontal: 16),
+            child: TopDrivers(drivers: data.topDrivers),
+          ),
+        ],
       ],
     );
   }

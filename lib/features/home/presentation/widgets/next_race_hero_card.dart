@@ -68,7 +68,7 @@ class NextRaceHeroCard extends StatelessWidget {
               Text(
                 '🏁 Race: $raceLabel',
                 style: theme.textTheme.bodyMedium?.copyWith(
-                  color: theme.colorScheme.onPrimaryContainer.withValues(alpha: 0.7),
+                  color: theme.colorScheme.primary,
                 ),
               ),
             ],

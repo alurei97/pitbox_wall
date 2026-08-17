@@ -20,7 +20,6 @@ class StandingsCubit extends Cubit<StandingsState> {
     switch (result) {
       case Left(value: final failure):
         emit(StandingsState.error(message: failure.message));
-        
       case Right(value: final standingsResult):
         final old = standingsResult.cache;
         emit(

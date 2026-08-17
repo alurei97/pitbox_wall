@@ -50,7 +50,10 @@ Future<void> configureDependencies() async {
 
   // Home feature
   getIt.registerFactory<HomeCubit>(
-    () => HomeCubit(getIt<ScheduleRepository>()),
+    () => HomeCubit(
+      getIt<ScheduleRepository>(),
+      getIt<StandingsRepository>(),
+    ),
   );
 
   // Standings feature

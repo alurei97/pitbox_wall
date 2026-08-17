@@ -10,7 +10,7 @@ import '../../domain/entities/race.dart';
 enum ListChip {
   done('', ''),
   next('Next', 'E8002D'),
-  raceWeek("IT'S WACE REEK", 'FFFFFF');
+  raceWeek("IT'S WACE REEK!", 'FFFFFF');
 
   const ListChip([this.label, this.hexColor]);
 
