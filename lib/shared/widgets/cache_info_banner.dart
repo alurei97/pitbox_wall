@@ -7,9 +7,12 @@ import '../models/cache_info.dart';
 /// Displays whether the data came from cache or a fresh API call,
 /// how long the operation took, and the remaining TTL.
 class CacheInfoBanner extends StatelessWidget {
-  const CacheInfoBanner({required this.cache, super.key});
+  const CacheInfoBanner({required this.cache, this.label, super.key});
 
   final CacheInfo cache;
+
+  /// Optional source label prepended to the banner, e.g. 'SCHEDULE', 'STANDINGS'.
+  final String? label;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +25,16 @@ class CacheInfoBanner extends StatelessWidget {
       child: Row(
         spacing: 8,
         children: [
+          if (label != null)
+            Text(
+              label!,
+              style: TextStyle(
+                fontSize: 11,
+                fontWeight: .w700,
+                color: color,
+                fontFamily: 'JetBrainsMono',
+              ),
+            ),
           Icon(
             cache.fromCache ? Icons.storage_outlined : Icons.cloud_download_outlined,
             size: 14,
@@ -32,7 +45,7 @@ class CacheInfoBanner extends StatelessWidget {
               _buildLabel(),
               style: TextStyle(
                 fontSize: 11,
-                fontWeight: FontWeight.w600,
+                fontWeight: .w600,
                 color: color,
                 fontFamily: 'JetBrainsMono',
               ),
