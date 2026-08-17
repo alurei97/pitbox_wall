@@ -4,6 +4,7 @@ import '../../../../core/error/either.dart';
 import '../../../../shared/models/cache_info.dart';
 import '../../../schedule/domain/entities/race.dart';
 import '../../../schedule/domain/repositories/schedule_repository.dart';
+import '../../../standings/domain/entities/constructor_standing.dart';
 import '../../../standings/domain/entities/driver_standing.dart';
 import '../../../standings/domain/repositories/standings_repository.dart';
 import 'home_state.dart';
@@ -40,6 +41,10 @@ class HomeCubit extends Cubit<HomeState> {
           Right(value: final sr) => sr.driverStandings.take(5).toList(growable: false),
           _ => <DriverStanding>[],
         };
+        final topConstructors = switch (standingsResult) {
+          Right(value: final sr) => sr.constructorStandings.take(3).toList(growable: false),
+          _ => <ConstructorStanding>[],
+        };
         final standingsCache = switch (standingsResult) {
           Right(value: final sr) => sr.cache,
           _ => null,
@@ -60,6 +65,7 @@ class HomeCubit extends Cubit<HomeState> {
                 ttlSeconds: old.ttlSeconds,
               ),
               topDrivers: topDrivers,
+              topConstructors: topConstructors,
               standingsCache: standingsCache,
             ),
           ),

@@ -4,6 +4,7 @@ import '../../../../shared/widgets/cache_info_banner.dart';
 import '../cubit/home_state.dart';
 import 'next_race_hero_card.dart';
 import 'race_week_badge.dart';
+import 'top_constructors_card.dart';
 import 'top_drivers_card.dart';
 
 /// Next race card, session countdown, season stats.
@@ -92,6 +93,15 @@ class HomeLoadedView extends StatelessWidget {
           Padding(
             padding: const .symmetric(horizontal: 16),
             child: TopDrivers(drivers: data.topDrivers),
+          ),
+        ],
+
+        // ── Top 3 constructors ──
+        if (data.topConstructors.isNotEmpty) ...[
+          const SizedBox(height: 24),
+          Padding(
+            padding: const .symmetric(horizontal: 16),
+            child: TopConstructors(constructors: data.topConstructors),
           ),
         ],
       ],

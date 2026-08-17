@@ -2,6 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../../shared/models/cache_info.dart';
 import '../../../schedule/domain/entities/race.dart';
+import '../../../standings/domain/entities/constructor_standing.dart';
 import '../../../standings/domain/entities/driver_standing.dart';
 
 part 'home_state.freezed.dart';
@@ -22,6 +23,7 @@ class HomeData {
     required this.completedRounds,
     required this.cache,
     this.topDrivers = const [],
+    this.topConstructors = const [],
     this.standingsCache,
   });
 
@@ -42,6 +44,9 @@ class HomeData {
 
   /// Top 5 driver standings, if available.
   final List<DriverStanding> topDrivers;
+
+  /// Top 3 constructor standings, if available.
+  final List<ConstructorStanding> topConstructors;
 
   /// Standings cache metadata, if standings were fetched.
   final CacheInfo? standingsCache;

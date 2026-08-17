@@ -9,32 +9,43 @@ class HomeSkeleton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Skeletonizer(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: .start,
         children: [
           // ── Season header ──
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Bone.text(width: 140, fontSize: 30),
+          const Padding(
+            padding: .symmetric(horizontal: 16),
+            child: Column(
+              crossAxisAlignment: .start,
+              children: [
+                Bone.text(width: 160, fontSize: 30),
+                SizedBox(height: 4),
+                Bone.text(width: 120, fontSize: 14),
+              ],
+            ),
           ),
 
-          // ── Cache banner bone ──
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Bone.text(width: 180, fontSize: 11),
+          // ── Cache banner bones ──
+          const Padding(
+            padding: .symmetric(horizontal: 16, vertical: 4),
+            child: Bone.text(width: 220, fontSize: 11),
+          ),
+          const Padding(
+            padding: .symmetric(horizontal: 16, vertical: 4),
+            child: Bone.text(width: 200, fontSize: 11),
           ),
 
           // ── Next race hero card ──
           Padding(
-            padding: EdgeInsets.all(16),
+            padding: const .all(16),
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(width: 1.5),
+                borderRadius: .circular(12),
+                border: .all(width: 1.5),
               ),
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 26, vertical: 14),
+              child: const Padding(
+                padding: .symmetric(horizontal: 26, vertical: 14),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: .start,
                   children: [
                     Bone.text(width: 100, fontSize: 18),
                     SizedBox(height: 8),
@@ -44,6 +55,44 @@ class HomeSkeleton extends StatelessWidget {
                   ],
                 ),
               ),
+            ),
+          ),
+
+          // ── Top drivers section ──
+          const Padding(
+            padding: .symmetric(horizontal: 16),
+            child: Column(
+              crossAxisAlignment: .start,
+              children: [
+                Bone.text(width: 140, fontSize: 16),
+                SizedBox(height: 10),
+                Bone.text(width: .infinity, fontSize: 14),
+                SizedBox(height: 8),
+                Bone.text(width: .infinity, fontSize: 14),
+                SizedBox(height: 8),
+                Bone.text(width: .infinity, fontSize: 14),
+                SizedBox(height: 8),
+                Bone.text(width: .infinity, fontSize: 14),
+                SizedBox(height: 8),
+                Bone.text(width: .infinity, fontSize: 14),
+              ],
+            ),
+          ),
+
+          // ── Top constructors section ──
+          const Padding(
+            padding: .symmetric(horizontal: 16),
+            child: Column(
+              crossAxisAlignment: .start,
+              children: [
+                Bone.text(width: 180, fontSize: 16),
+                SizedBox(height: 10),
+                Bone.text(width: .infinity, fontSize: 14),
+                SizedBox(height: 8),
+                Bone.text(width: .infinity, fontSize: 14),
+                SizedBox(height: 8),
+                Bone.text(width: .infinity, fontSize: 14),
+              ],
             ),
           ),
         ],
