@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../shared/utils/flags.dart';
+import '../../../../shared/widgets/list_divider.dart';
 import '../../domain/entities/race.dart';
 import 'race_status.dart';
 import 'schedule_items.dart' show monthNames;
@@ -26,6 +27,7 @@ class RaceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+
     final flag = flagEmojiForCountry(race.country);
 
     return Padding(
@@ -101,15 +103,7 @@ class RaceCard extends StatelessWidget {
             ),
           ),
 
-          if (showDivider)
-            Padding(
-              padding: const .symmetric(horizontal: 0),
-              child: Divider(
-                height: 4,
-                thickness: 1,
-                color: theme.colorScheme.onSurface.withValues(alpha: 0.1),
-              ),
-            ),
+          if (showDivider) const ListDivider(),
         ],
       ),
     );
