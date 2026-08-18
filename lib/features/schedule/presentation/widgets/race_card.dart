@@ -43,13 +43,13 @@ class RaceCard extends StatelessWidget {
                 crossAxisAlignment: .center,
                 children: [
                   SizedBox(
-                    width: MediaQuery.sizeOf(context).width * 0.12,
+                    width: MediaQuery.sizeOf(context).width * 0.14,
                     child: Text(
                       _dateLabel(race),
                       textAlign: .left,
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+                      style: theme.textTheme.titleLarge?.copyWith(
+                        color: theme.colorScheme.onPrimary.withValues(alpha: 0.6),
+                        fontSize: 16,
                       ),
                     ),
                   ),
@@ -58,13 +58,11 @@ class RaceCard extends StatelessWidget {
                     children: [
                       Text(
                         flag ?? '',
-                        style: theme.textTheme.headlineSmall,
+                        style: theme.textTheme.headlineSmall?.copyWith(fontSize: 20),
                       ),
                       Text(
                         'R${race.round}',
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          fontSize: 12,
-                        ),
+                        style: theme.textTheme.bodyMedium,
                       ),
                     ],
                   ),

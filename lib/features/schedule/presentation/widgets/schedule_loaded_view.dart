@@ -136,11 +136,7 @@ class _ScheduleLoadedViewState extends State<ScheduleLoadedView> {
                     padding: const .all(0),
                     child: Text(
                       label,
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: .w700,
-                        color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
-                      ),
+                      style: theme.textTheme.titleMedium,
                     ),
                   ),
                   RaceItem(:final race) => RaceCard(
