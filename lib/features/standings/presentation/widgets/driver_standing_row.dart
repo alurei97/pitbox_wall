@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/utils/f1_cdn.dart';
 import '../../../../shared/theme/app_theme.dart';
 import '../../domain/entities/driver_standing.dart';
 
@@ -24,7 +26,7 @@ class DriverStandingRow extends StatelessWidget {
           crossAxisAlignment: .center,
           children: [
             SizedBox(
-              width: MediaQuery.sizeOf(context).width * 0.12,
+              width: MediaQuery.sizeOf(context).width * 0.1,
               child: Text(
                 standing.position.toString(),
                 textAlign: .left,
@@ -33,6 +35,9 @@ class DriverStandingRow extends StatelessWidget {
                 ),
               ),
             ),
+
+            _DriverAvatar(teamColor: teamColor, standing: standing),
+            const SizedBox(width: 15),
 
             Expanded(
               child: Column(
@@ -46,23 +51,13 @@ class DriverStandingRow extends StatelessWidget {
                     maxLines: 1,
                     overflow: .ellipsis,
                   ),
-                  Row(
-                    spacing: 4,
-                    children: [
-                      Container(
-                        width: 16,
-                        height: 16,
-                        decoration: BoxDecoration(color: teamColor),
-                      ),
-                      Text(
-                        standing.constructorName,
-                        style: theme.textTheme.bodySmall?.copyWith(
-                          color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
-                        ),
-                        maxLines: 1,
-                        overflow: .ellipsis,
-                      ),
-                    ],
+                  Text(
+                    standing.constructorName,
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+                    ),
+                    maxLines: 1,
+                    overflow: .ellipsis,
                   ),
                 ],
               ),
@@ -76,6 +71,36 @@ class DriverStandingRow extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _DriverAvatar extends StatelessWidget {
+  const _DriverAvatar({required this.teamColor, required this.standing});
+
+  final Color teamColor;
+  final DriverStanding standing;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 48,
+      height: 48,
+      decoration: BoxDecoration(
+        color: teamColor.withValues(alpha: 0.6),
+        shape: .circle,
+      ),
+      clipBehavior: .antiAlias,
+      child: CachedNetworkImage(
+        imageUrl: F1Cdn.driverAvatar(
+          standing.constructorId,
+          standing.givenName,
+          standing.familyName,
+        ),
+        fit: BoxFit.cover,
+        placeholder: (_, _) => const SizedBox.shrink(),
+        errorWidget: (_, _, _) => const Icon(Icons.person_outline),
       ),
     );
   }

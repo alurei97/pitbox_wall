@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/utils/f1_cdn.dart';
 import '../../../../shared/theme/app_theme.dart';
 import '../../domain/entities/constructor_standing.dart';
 
@@ -12,7 +14,6 @@ class ConstructorStandingRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-
     final teamColor = AppTheme.teamColor(standing.constructorId);
 
     return GestureDetector(
@@ -24,7 +25,7 @@ class ConstructorStandingRow extends StatelessWidget {
           crossAxisAlignment: .center,
           children: [
             SizedBox(
-              width: MediaQuery.sizeOf(context).width * 0.12,
+              width: MediaQuery.sizeOf(context).width * 0.1,
               child: Text(
                 standing.position.toString(),
                 textAlign: .left,
@@ -34,27 +35,23 @@ class ConstructorStandingRow extends StatelessWidget {
               ),
             ),
 
+            _TeamLogoPreview(
+              team: standing.constructorId,
+              background: teamColor.withValues(alpha: 0.6),
+            ),
+            const SizedBox(width: 15),
+
             Expanded(
               child: Column(
                 crossAxisAlignment: .start,
                 children: [
-                  Row(
-                    spacing: 6,
-                    children: [
-                      Container(
-                        width: 18,
-                        height: 18,
-                        decoration: BoxDecoration(color: teamColor),
-                      ),
-                      Text(
-                        standing.constructorName,
-                        style: theme.textTheme.bodyLarge?.copyWith(
-                          fontWeight: .w600,
-                        ),
-                        maxLines: 1,
-                        overflow: .ellipsis,
-                      ),
-                    ],
+                  Text(
+                    standing.constructorName,
+                    style: theme.textTheme.bodyLarge?.copyWith(
+                      fontWeight: .w600,
+                    ),
+                    maxLines: 1,
+                    overflow: .ellipsis,
                   ),
                   Text(
                     '${standing.wins} wins',
@@ -76,6 +73,33 @@ class ConstructorStandingRow extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _TeamLogoPreview extends StatelessWidget {
+  const _TeamLogoPreview({required this.team, required this.background});
+
+  final String team;
+  final Color background;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 48,
+      height: 48,
+      padding: const EdgeInsets.all(4),
+      decoration: BoxDecoration(
+        color: background.withValues(alpha: 0.6),
+        shape: .circle,
+      ),
+      clipBehavior: .antiAlias,
+      child: CachedNetworkImage(
+        imageUrl: F1Cdn.teamLogo(team),
+        fit: BoxFit.contain,
+        placeholder: (_, _) => const SizedBox.shrink(),
+        errorWidget: (_, _, _) => const Icon(Icons.flag_outlined, size: 18),
       ),
     );
   }

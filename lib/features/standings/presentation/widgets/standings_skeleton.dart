@@ -29,29 +29,27 @@ class StandingsSkeleton extends StatelessWidget {
             child: ListView.separated(
               itemCount: 12,
               padding: const EdgeInsets.all(16),
-              separatorBuilder: (_, _) => const Bone.text(width: double.infinity, fontSize: 1),
+              separatorBuilder: (_, _) => const Bone.text(width: double.infinity, fontSize: 4),
               itemBuilder: (_, _) => const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 2, vertical: 12),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(
-                      width: 40,
-                      child: Bone.text(width: 24, fontSize: 22),
+                      width: 0,
+                      child: Bone.text(width: 1, fontSize: 1),
                     ),
+                    Bone.text(width: 32, fontSize: 22),
+                    SizedBox(width: 15),
+                    Bone.text(width: 48, fontSize: 48),
+                    SizedBox(width: 15),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Bone.text(width: 150, fontSize: 16),
+                          Bone.text(width: 170, fontSize: 16),
                           SizedBox(height: 4),
-                          Row(
-                            children: [
-                              Bone.text(width: 16, fontSize: 16),
-                              SizedBox(width: 4),
-                              Bone.text(width: 100, fontSize: 12),
-                            ],
-                          ),
+                          Bone.text(width: 120, fontSize: 12),
                         ],
                       ),
                     ),
