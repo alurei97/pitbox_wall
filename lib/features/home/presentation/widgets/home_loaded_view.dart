@@ -37,14 +37,14 @@ class HomeLoadedView extends StatelessWidget {
                     nextRace != null ? nextRace.raceName : 'Season $seasonYear finished',
                     style: theme.textTheme.headlineLarge,
                     maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+                    overflow: .ellipsis,
                   ),
                   if (nextRace != null)
                     Text(
                       '${nextRace.circuitName} · Round ${nextRace.round}',
                       style: theme.textTheme.titleSmall,
                       maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+                      overflow: .ellipsis,
                     ),
                 ],
               ),

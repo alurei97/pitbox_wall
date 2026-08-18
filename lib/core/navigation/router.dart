@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/ai_assistant/presentation/pages/ai_page.dart';
+import '../../features/constructor/presentation/pages/constructor_card_page.dart';
 import '../../features/driver/presentation/pages/driver_card_page.dart';
 import '../../features/home/presentation/pages/home_page.dart';
 import '../../features/results/presentation/pages/race_weekend_page.dart';
@@ -52,6 +53,10 @@ final router = GoRouter(
     GoRoute(
       path: '/driver/:id',
       builder: (_, state) => DriverCardPage(id: state.pathParameters['id']!),
+    ),
+    GoRoute(
+      path: '/constructor/:id',
+      builder: (_, state) => ConstructorCardPage(id: state.pathParameters['id']!),
     ),
   ],
 );

@@ -119,7 +119,7 @@ class _ScheduleLoadedViewState extends State<ScheduleLoadedView> {
             ),
           ),
         ),
-        CacheInfoBanner(cache: widget.cache),
+        CacheInfoBanner(cache: widget.cache, label: 'SCHEDULE'),
 
         // ── Scrollable: month sections + race cards ──
         Expanded(

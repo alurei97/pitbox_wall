@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../shared/theme/app_theme.dart';
 import '../../../standings/domain/entities/constructor_standing.dart';
@@ -39,42 +40,48 @@ class _ConstructorStandingRow extends StatelessWidget {
     final theme = Theme.of(context);
     final teamColor = AppTheme.teamColor(standing.constructorId);
 
-    return Row(
-      crossAxisAlignment: .center,
-      children: [
-        SizedBox(
-          width: 24,
-          child: Text(
-            standing.position.toString(),
-            style: theme.textTheme.titleMedium?.copyWith(
-              color: theme.colorScheme.onPrimary.withValues(alpha: 0.5),
+    return GestureDetector(
+      behavior: .opaque,
+      onTap: () => context.push('/constructor/${standing.constructorId}'),
+      child: Row(
+        crossAxisAlignment: .center,
+        children: [
+          SizedBox(
+            width: 24,
+            child: Text(
+              standing.position.toString(),
+              style: theme.textTheme.titleMedium?.copyWith(
+                color: theme.colorScheme.onPrimary.withValues(alpha: 0.6),
+              ),
             ),
           ),
-        ),
 
-        Container(
-          width: 14,
-          height: 14,
-          decoration: BoxDecoration(color: teamColor),
-        ),
-        const SizedBox(width: 4),
-
-        Expanded(
-          child: Text(
-            standing.constructorName,
-            maxLines: 1,
-            overflow: .ellipsis,
-            style: theme.textTheme.titleMedium,
+          Container(
+            width: 14,
+            height: 14,
+            decoration: BoxDecoration(color: teamColor),
           ),
-        ),
+          const SizedBox(width: 4),
 
-        Text(
-          standing.points.toStringAsFixed(0),
-          style: theme.textTheme.titleMedium?.copyWith(
-            color: theme.colorScheme.primary,
+          Expanded(
+            child: Text(
+              standing.constructorName,
+              maxLines: 1,
+              overflow: .ellipsis,
+              style: theme.textTheme.bodyLarge?.copyWith(
+                fontWeight: .w600,
+              ),
+            ),
           ),
-        ),
-      ],
+
+          Text(
+            standing.points.toStringAsFixed(0),
+            style: theme.textTheme.titleMedium?.copyWith(
+              color: theme.colorScheme.primary,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

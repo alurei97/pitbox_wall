@@ -56,7 +56,7 @@ class _DriverStandingRow extends StatelessWidget {
             child: Text(
               standing.position.toString(),
               style: theme.textTheme.titleMedium?.copyWith(
-                color: theme.colorScheme.onPrimary.withValues(alpha: 0.5),
+                color: theme.colorScheme.onPrimary.withValues(alpha: 0.6),
               ),
             ),
           ),
@@ -75,7 +75,9 @@ class _DriverStandingRow extends StatelessWidget {
               standing.familyName,
               maxLines: 1,
               overflow: .ellipsis,
-              style: theme.textTheme.titleMedium,
+              style: theme.textTheme.bodyLarge?.copyWith(
+                fontWeight: .w600,
+              ),
             ),
           ),
 

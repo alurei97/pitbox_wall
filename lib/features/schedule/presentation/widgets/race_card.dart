@@ -46,7 +46,7 @@ class RaceCard extends StatelessWidget {
                     width: MediaQuery.sizeOf(context).width * 0.12,
                     child: Text(
                       _dateLabel(race),
-                      textAlign: TextAlign.left,
+                      textAlign: .left,
                       style: TextStyle(
                         fontSize: 12,
                         color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
