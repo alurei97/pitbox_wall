@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 
 import '../../domain/entities/constructor_standing.dart';
+import '../../domain/entities/driver_round_standing.dart';
 import '../../domain/entities/driver_standing.dart';
 
 class StandingsRemoteDataSource {
@@ -20,6 +21,18 @@ class StandingsRemoteDataSource {
     return rows
         .map(_mapConstructorStanding)
         .whereType<ConstructorStanding>()
+        .toList(growable: false);
+  }
+
+  Future<List<DriverRoundStanding>> fetchDriverStandingsAtRound({
+    required int season,
+    required int round,
+  }) async {
+    final res = await _dio.get('$season/$round/driverStandings');
+    final rows = _extractStandingsRows(res.data, 'DriverStandings');
+    return rows
+        .map((row) => _mapDriverRoundStanding(row, round))
+        .whereType<DriverRoundStanding>()
         .toList(growable: false);
   }
 
@@ -95,6 +108,36 @@ class StandingsRemoteDataSource {
       wins: wins,
       constructorId: constructorId,
       constructorName: constructorName,
+    );
+  }
+
+  DriverRoundStanding? _mapDriverRoundStanding(Map<String, dynamic> raw, int round) {
+    final position = int.tryParse(raw['position']?.toString() ?? '');
+    final points = double.tryParse(raw['points']?.toString() ?? '');
+    final driver = raw['Driver'] as Map<String, dynamic>?;
+    final driverId = driver?['driverId']?.toString();
+    final driverCode = driver?['code']?.toString();
+    final constructors = raw['Constructors'] as List?;
+    final constructor = constructors != null && constructors.isNotEmpty
+        ? constructors.first as Map<String, dynamic>?
+        : null;
+    final constructorId = constructor?['constructorId']?.toString();
+
+    if (position == null ||
+        points == null ||
+        driverId == null ||
+        driverCode == null ||
+        constructorId == null) {
+      return null;
+    }
+
+    return DriverRoundStanding(
+      round: round,
+      driverId: driverId,
+      driverCode: driverCode,
+      constructorId: constructorId,
+      position: position,
+      points: points,
     );
   }
 }
