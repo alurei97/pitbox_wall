@@ -81,7 +81,7 @@ class AppTheme {
   /// Team colours map
   static const Map<String, Color> teamColors = {
     'mclaren': Color(0xFFFF8000),
-    'red_bull': Color(0xFF182852),
+    'red_bull': Color.fromARGB(255, 28, 63, 153),
     'ferrari': Color(0xFFE8002D),
     'mercedes': Color(0xFF27F4D2),
     'aston_martin': Color(0xFF0A7968),

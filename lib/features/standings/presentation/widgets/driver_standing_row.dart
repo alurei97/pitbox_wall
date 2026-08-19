@@ -7,9 +7,18 @@ import '../../../../shared/theme/app_theme.dart';
 import '../../domain/entities/driver_standing.dart';
 
 class DriverStandingRow extends StatelessWidget {
-  const DriverStandingRow({required this.standing, super.key});
+  const DriverStandingRow({
+    required this.standing,
+    this.selecting = false,
+    this.selected = false,
+    this.onToggle,
+    super.key,
+  });
 
   final DriverStanding standing;
+  final bool selecting;
+  final bool selected;
+  final VoidCallback? onToggle;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +28,7 @@ class DriverStandingRow extends StatelessWidget {
 
     return GestureDetector(
       behavior: .opaque,
-      onTap: () => context.push('/driver/${standing.driverId}'),
+      onTap: selecting ? onToggle : () => context.push('/driver/${standing.driverId}'),
       child: Padding(
         padding: const .symmetric(horizontal: 2, vertical: 12),
         child: Row(
@@ -63,11 +72,22 @@ class DriverStandingRow extends StatelessWidget {
               ),
             ),
 
-            Text(
-              standing.points.toStringAsFixed(0),
-              style: theme.textTheme.titleMedium?.copyWith(
-                color: theme.colorScheme.primary,
-              ),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  standing.points.toStringAsFixed(0),
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    color: theme.colorScheme.primary,
+                  ),
+                ),
+                if (selecting)
+                  Checkbox(
+                    value: selected,
+                    onChanged: (_) => onToggle?.call(),
+                    visualDensity: VisualDensity.compact,
+                  ),
+              ],
             ),
           ],
         ),

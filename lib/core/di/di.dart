@@ -11,6 +11,7 @@ import '../../features/home/presentation/cubit/home_cubit.dart';
 import '../../features/standings/data/datasources/standings_remote_data_source.dart';
 import '../../features/standings/data/repositories/standings_repository_impl.dart';
 import '../../features/standings/domain/repositories/standings_repository.dart';
+import '../../features/standings/presentation/cubit/chart_cubit.dart';
 import '../../features/standings/presentation/cubit/standings_cubit.dart';
 
 final getIt = GetIt.instance;
@@ -70,5 +71,11 @@ Future<void> configureDependencies() async {
   );
   getIt.registerFactory<StandingsCubit>(
     () => StandingsCubit(getIt<StandingsRepository>()),
+  );
+  getIt.registerFactory<ChartCubit>(
+    () => ChartCubit(
+      getIt<StandingsRepository>(),
+      getIt<ScheduleRepository>(),
+    ),
   );
 }

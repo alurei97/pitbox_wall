@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/di/di.dart';
 import '../../../../shared/widgets/error_retry_view.dart';
+import '../cubit/chart_cubit.dart';
 import '../cubit/standings_cubit.dart';
 import '../cubit/standings_state.dart';
 import '../widgets/standings_loaded_view.dart';
@@ -14,8 +15,11 @@ class StandingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => getIt<StandingsCubit>()..load(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => getIt<StandingsCubit>()..load()),
+        BlocProvider(create: (_) => getIt<ChartCubit>()..downloadHistory()),
+      ],
       child: Scaffold(
         body: SafeArea(
           child: BlocBuilder<StandingsCubit, StandingsState>(

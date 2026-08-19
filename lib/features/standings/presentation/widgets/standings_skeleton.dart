@@ -10,6 +10,15 @@ class StandingsSkeleton extends StatelessWidget {
     return Skeletonizer(
       child: Column(
         children: [
+          Container(
+            width: double.infinity,
+            height: 220,
+            margin: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(width: 1.5),
+            ),
+          ),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Row(
@@ -36,12 +45,10 @@ class StandingsSkeleton extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(
-                      width: 0,
-                      child: Bone.text(width: 1, fontSize: 1),
+                      width: 32,
+                      child: Bone.text(width: 24, fontSize: 22),
                     ),
-                    Bone.text(width: 32, fontSize: 22),
-                    SizedBox(width: 15),
-                    Bone.text(width: 48, fontSize: 48),
+                    Bone.circle(size: 48),
                     SizedBox(width: 15),
                     Expanded(
                       child: Column(

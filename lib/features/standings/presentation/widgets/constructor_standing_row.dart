@@ -7,9 +7,18 @@ import '../../../../shared/theme/app_theme.dart';
 import '../../domain/entities/constructor_standing.dart';
 
 class ConstructorStandingRow extends StatelessWidget {
-  const ConstructorStandingRow({required this.standing, super.key});
+  const ConstructorStandingRow({
+    required this.standing,
+    this.selecting = false,
+    this.selected = false,
+    this.onToggle,
+    super.key,
+  });
 
   final ConstructorStanding standing;
+  final bool selecting;
+  final bool selected;
+  final VoidCallback? onToggle;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +27,7 @@ class ConstructorStandingRow extends StatelessWidget {
 
     return GestureDetector(
       behavior: .opaque,
-      onTap: () => context.push('/constructor/${standing.constructorId}'),
+      onTap: selecting ? onToggle : () => context.push('/constructor/${standing.constructorId}'),
       child: Padding(
         padding: const .symmetric(horizontal: 2, vertical: 12),
         child: Row(
@@ -65,11 +74,22 @@ class ConstructorStandingRow extends StatelessWidget {
               ),
             ),
 
-            Text(
-              standing.points.toStringAsFixed(0),
-              style: theme.textTheme.titleMedium?.copyWith(
-                color: theme.colorScheme.primary,
-              ),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  standing.points.toStringAsFixed(0),
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    color: theme.colorScheme.primary,
+                  ),
+                ),
+                if (selecting)
+                  Checkbox(
+                    value: selected,
+                    onChanged: (_) => onToggle?.call(),
+                    visualDensity: VisualDensity.compact,
+                  ),
+              ],
             ),
           ],
         ),
