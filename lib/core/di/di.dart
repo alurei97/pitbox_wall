@@ -8,6 +8,9 @@ import '../../features/schedule/data/repositories/schedule_repository_impl.dart'
 import '../../features/schedule/domain/repositories/schedule_repository.dart';
 import '../../features/schedule/presentation/cubit/schedule_cubit.dart';
 import '../../features/home/presentation/cubit/home_cubit.dart';
+import '../../features/results/data/datasources/results_remote_data_source.dart';
+import '../../features/results/data/repositories/results_repository_impl.dart';
+import '../../features/results/domain/repositories/results_repository.dart';
 import '../../features/standings/data/datasources/standings_remote_data_source.dart';
 import '../../features/standings/data/repositories/standings_repository_impl.dart';
 import '../../features/standings/domain/repositories/standings_repository.dart';
@@ -76,6 +79,19 @@ Future<void> configureDependencies() async {
     () => ChartCubit(
       getIt<StandingsRepository>(),
       getIt<ScheduleRepository>(),
+    ),
+  );
+
+  // Results feature
+  getIt.registerLazySingleton<ResultsRemoteDataSource>(
+    () => ResultsRemoteDataSource(
+      getIt<Dio>(instanceName: DioFactory.jolpicaName),
+    ),
+  );
+  getIt.registerLazySingleton<ResultsRepository>(
+    () => ResultsRepositoryImpl(
+      getIt<ResultsRemoteDataSource>(),
+      getIt<AppDatabase>(),
     ),
   );
 }

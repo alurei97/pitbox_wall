@@ -70,10 +70,12 @@ class StandingsRemoteDataSource {
     final driverId = driver['driverId']?.toString();
     final givenName = driver['givenName']?.toString();
     final familyName = driver['familyName']?.toString();
+    final driverNumber = driver['permanentNumber']?.toString();
     final constructorId = constructor['constructorId']?.toString();
     final constructorName = constructor['name']?.toString();
 
-    if (driverId == null || givenName == null || familyName == null) return null;
+    if (driverId == null || givenName == null || familyName == null || driverNumber == null)
+      return null;
     if (constructorId == null || constructorName == null) return null;
 
     return DriverStanding(
@@ -82,6 +84,7 @@ class StandingsRemoteDataSource {
       wins: wins,
       driverId: driverId,
       driverCode: driver['code']?.toString(),
+      driverNumber: driverNumber,
       givenName: givenName,
       familyName: familyName,
       constructorId: constructorId,

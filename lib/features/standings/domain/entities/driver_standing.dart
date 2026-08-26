@@ -11,6 +11,7 @@ abstract class DriverStanding with _$DriverStanding {
     required int wins,
     required String driverId,
     String? driverCode,
+    required String driverNumber,
     required String givenName,
     required String familyName,
     required String constructorId,
