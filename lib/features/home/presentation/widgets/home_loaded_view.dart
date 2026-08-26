@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../shared/debug/debug_flags.dart';
 import '../../../../shared/widgets/cache_info_banner.dart';
 import '../cubit/home_state.dart';
 import 'next_race_hero_card.dart';
@@ -33,11 +34,14 @@ class HomeLoadedView extends StatelessWidget {
               Column(
                 crossAxisAlignment: .start,
                 children: [
-                  Text(
-                    nextRace != null ? nextRace.raceName : 'Season $seasonYear finished',
-                    style: theme.textTheme.headlineLarge,
-                    maxLines: 1,
-                    overflow: .ellipsis,
+                  GestureDetector(
+                    onLongPress: () => showCacheInfo.value = !showCacheInfo.value,
+                    child: Text(
+                      nextRace != null ? nextRace.raceName : 'Season $seasonYear finished',
+                      style: theme.textTheme.headlineLarge,
+                      maxLines: 1,
+                      overflow: .ellipsis,
+                    ),
                   ),
                   if (nextRace != null)
                     Text(

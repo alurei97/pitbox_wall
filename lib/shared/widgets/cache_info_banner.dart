@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 
+import '../debug/debug_flags.dart';
 import '../models/cache_info.dart';
 
 /// Debug banner that shows cache timing info for any screen.
 ///
 /// Displays whether the data came from cache or a fresh API call,
 /// how long the operation took, and the remaining TTL.
+///
+/// Hidden unless the global [showCacheInfo] debug flag is enabled
+/// (toggled by long-pressing the home title).
 class CacheInfoBanner extends StatelessWidget {
   const CacheInfoBanner({required this.cache, this.label, super.key});
 
@@ -16,6 +20,16 @@ class CacheInfoBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return ValueListenableBuilder<bool>(
+      valueListenable: showCacheInfo,
+      builder: (context, show, _) {
+        if (!show) return const SizedBox.shrink();
+        return _buildBanner(context);
+      },
+    );
+  }
+
+  Widget _buildBanner(BuildContext context) {
     final theme = Theme.of(context);
     final color = theme.colorScheme.onPrimary.withValues(alpha: 0.3);
 
