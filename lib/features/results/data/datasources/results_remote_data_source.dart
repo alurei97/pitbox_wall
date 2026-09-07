@@ -72,6 +72,7 @@ class ResultsRemoteDataSource {
     final grid = int.tryParse(raw['grid']?.toString() ?? '');
     final points = double.tryParse(raw['points']?.toString() ?? '');
     final status = raw['status']?.toString();
+    final time = (raw['Time'] as Map<String, dynamic>?)?['time']?.toString();
 
     if (driverId == null ||
         driverCode == null ||
@@ -103,6 +104,7 @@ class ResultsRemoteDataSource {
       grid: grid,
       points: points,
       status: status,
+      time: time,
     );
   }
 
@@ -132,6 +134,9 @@ class ResultsRemoteDataSource {
       givenName: givenName,
       familyName: familyName,
       position: position,
+      q1: raw['Q1']?.toString(),
+      q2: raw['Q2']?.toString(),
+      q3: raw['Q3']?.toString(),
     );
   }
 }

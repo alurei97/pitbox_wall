@@ -17,6 +17,12 @@ class ResultsResult {
 }
 
 abstract class ResultsRepository {
+  Future<Either<Failure, ResultsResult>> getRoundResults({
+    required int season,
+    required int round,
+    bool forceRefresh = false,
+  });
+
   Future<Either<Failure, ResultsResult>> getSeasonResults({
     required int season,
     required int lastCompletedRound,

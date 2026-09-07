@@ -37,7 +37,9 @@ class ResultsRepositoryImpl implements ResultsRepository {
       final race = await _remote.fetchRaceResults(season: season, round: round);
       final sprint = await _remote.fetchSprintResults(season: season, round: round);
       final qualifying = await _remote.fetchQualifyingResults(season: season, round: round);
-      if (race.isEmpty) return const Left(ServerFailure('No race results returned by Jolpica.'));
+      if (race.isEmpty && sprint.isEmpty && qualifying.isEmpty) {
+        return const Left(ServerFailure('No results have been published by Jolpica yet.'));
+      }
       final payload = jsonEncode({
         'raceResults': [...race, ...sprint].map((r) => r.toJson()).toList(growable: false),
         'qualifyingResults': qualifying.map((r) => r.toJson()).toList(growable: false),
