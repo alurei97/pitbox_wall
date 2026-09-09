@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../../schedule/domain/entities/race.dart';
 import '../cubit/home_state.dart';
+import '../../../../shared/utils/date_time_format.dart';
 
 /// Hero card for the next race, shown on the home screen.
 /// Shows a live countdown to the next session.
@@ -28,11 +28,7 @@ class NextRaceHeroCard extends StatelessWidget {
     final countdown = next != null ? _countdown(next.dateTime, now) : '—';
 
     final raceDate = race.raceDateTime.toLocal();
-    final dayName = _dayName(raceDate.weekday);
-    final month = _monthName(raceDate.month);
-    final hh = raceDate.hour.toString().padLeft(2, '0');
-    final mm = raceDate.minute.toString().padLeft(2, '0');
-    final raceLabel = '$dayName ${raceDate.day} $month, $hh:$mm';
+    final raceLabel = formatRaceDateTime(raceDate);
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
@@ -57,8 +53,7 @@ class NextRaceHeroCard extends StatelessWidget {
 
               Text(
                 countdown,
-                style: GoogleFonts.jetBrainsMono(
-                  fontSize: 40,
+                style: theme.textTheme.displaySmall?.copyWith(
                   fontWeight: FontWeight.w700,
                   color: theme.colorScheme.onPrimaryContainer,
                 ),
@@ -91,30 +86,3 @@ String _countdown(DateTime target, DateTime now) {
   if (hours > 0) return '${hours}h ${minutes}m';
   return '${minutes}m';
 }
-
-String _dayName(int d) => switch (d) {
-  1 => 'Mon',
-  2 => 'Tue',
-  3 => 'Wed',
-  4 => 'Thu',
-  5 => 'Fri',
-  6 => 'Sat',
-  7 => 'Sun',
-  _ => '',
-};
-
-String _monthName(int m) => switch (m) {
-  1 => 'Jan',
-  2 => 'Feb',
-  3 => 'Mar',
-  4 => 'Apr',
-  5 => 'May',
-  6 => 'Jun',
-  7 => 'Jul',
-  8 => 'Aug',
-  9 => 'Sep',
-  10 => 'Oct',
-  11 => 'Nov',
-  12 => 'Dec',
-  _ => '',
-};

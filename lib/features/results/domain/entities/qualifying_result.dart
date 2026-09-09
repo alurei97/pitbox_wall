@@ -12,7 +12,11 @@ abstract class QualifyingResult with _$QualifyingResult {
     required String driverCode,
     required String givenName,
     required String familyName,
+    required String constructorName,
     required int position,
+    String? q1,
+    String? q2,
+    String? q3,
   }) = _QualifyingResult;
 
   factory QualifyingResult.fromJson(Map<String, dynamic> json) => _$QualifyingResultFromJson(json);

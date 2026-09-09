@@ -28,8 +28,12 @@ abstract class Race with _$Race {
   const factory Race({
     required int round,
     required String raceName,
+    String? circuitId,
     required String circuitName,
     required String country,
+    String? locality,
+    double? latitude,
+    double? longitude,
     required DateTime fp1DateTime,
     DateTime? fp2DateTime,
     DateTime? sprintDateTime,

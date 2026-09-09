@@ -118,11 +118,14 @@ class ResultsRemoteDataSource {
     final driverCode = driver?['code']?.toString();
     final givenName = driver?['givenName']?.toString();
     final familyName = driver?['familyName']?.toString();
+    final constructor = raw['Constructor'] as Map<String, dynamic>?;
+    final constructorName = constructor?['name']?.toString();
     final position = int.tryParse(raw['position']?.toString() ?? '');
     if (driverId == null ||
         driverCode == null ||
         givenName == null ||
         familyName == null ||
+        constructorName == null ||
         position == null) {
       return null;
     }
@@ -133,6 +136,7 @@ class ResultsRemoteDataSource {
       driverCode: driverCode,
       givenName: givenName,
       familyName: familyName,
+      constructorName: constructorName,
       position: position,
       q1: raw['Q1']?.toString(),
       q2: raw['Q2']?.toString(),

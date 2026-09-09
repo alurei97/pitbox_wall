@@ -21,6 +21,7 @@ _RaceResult _$RaceResultFromJson(Map<String, dynamic> json) => _RaceResult(
   grid: (json['grid'] as num).toInt(),
   points: (json['points'] as num).toDouble(),
   status: json['status'] as String,
+  time: json['time'] as String?,
 );
 
 Map<String, dynamic> _$RaceResultToJson(_RaceResult instance) =>
@@ -39,4 +40,5 @@ Map<String, dynamic> _$RaceResultToJson(_RaceResult instance) =>
       'grid': instance.grid,
       'points': instance.points,
       'status': instance.status,
+      'time': instance.time,
     };

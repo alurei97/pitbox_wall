@@ -30,9 +30,13 @@ class ScheduleRemoteDataSource {
     final raceName = raw['raceName']?.toString();
 
     final circuit = raw['Circuit'] as Map<String, dynamic>?;
+    final circuitId = circuit?['circuitId']?.toString();
     final circuitName = circuit?['circuitName']?.toString();
     final location = circuit?['Location'] as Map<String, dynamic>?;
     final country = location?['country']?.toString();
+    final locality = location?['locality']?.toString();
+    final latitude = double.tryParse(location?['lat']?.toString() ?? '');
+    final longitude = double.tryParse(location?['long']?.toString() ?? '');
 
     if (roundRaw == null || raceName == null || circuitName == null || country == null) {
       return null;
@@ -52,8 +56,12 @@ class ScheduleRemoteDataSource {
     return Race(
       round: round,
       raceName: raceName,
+      circuitId: circuitId,
       circuitName: circuitName,
       country: country,
+      locality: locality,
+      latitude: latitude,
+      longitude: longitude,
       fp1DateTime: fp1DateTime,
       fp2DateTime: _sessionDateTime(raw, 'SecondPractice'),
       sprintDateTime: _sessionDateTime(raw, 'Sprint'),

@@ -20,6 +20,7 @@ abstract class RaceResult with _$RaceResult {
     required int grid,
     required double points,
     required String status,
+    String? time,
   }) = _RaceResult;
 
   factory RaceResult.fromJson(Map<String, dynamic> json) => _$RaceResultFromJson(json);

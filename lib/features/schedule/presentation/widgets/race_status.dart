@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../domain/entities/race.dart';
+import '../../../../shared/widgets/status_chip.dart';
 
 // ---------------------------------------------------------------------------
 // Status chips
@@ -57,21 +58,9 @@ class StatusChip extends StatelessWidget {
       return const Text('🏁', style: TextStyle(fontSize: 14));
     }
 
-    final color = Color(int.parse('FF${chip.hexColor}', radix: 16));
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-      decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.15),
-        borderRadius: BorderRadius.circular(999),
-      ),
-      child: Text(
-        chip.label!,
-        style: TextStyle(
-          fontSize: 12,
-          fontWeight: FontWeight.w700,
-          color: color,
-        ),
-      ),
+    return AppStatusChip(
+      label: chip.label!,
+      color: Color(int.parse('FF${chip.hexColor}', radix: 16)),
     );
   }
 }

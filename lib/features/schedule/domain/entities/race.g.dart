@@ -9,8 +9,12 @@ part of 'race.dart';
 _Race _$RaceFromJson(Map<String, dynamic> json) => _Race(
   round: (json['round'] as num).toInt(),
   raceName: json['raceName'] as String,
+  circuitId: json['circuitId'] as String?,
   circuitName: json['circuitName'] as String,
   country: json['country'] as String,
+  locality: json['locality'] as String?,
+  latitude: (json['latitude'] as num?)?.toDouble(),
+  longitude: (json['longitude'] as num?)?.toDouble(),
   fp1DateTime: DateTime.parse(json['fp1DateTime'] as String),
   fp2DateTime: json['fp2DateTime'] == null
       ? null
@@ -31,8 +35,12 @@ _Race _$RaceFromJson(Map<String, dynamic> json) => _Race(
 Map<String, dynamic> _$RaceToJson(_Race instance) => <String, dynamic>{
   'round': instance.round,
   'raceName': instance.raceName,
+  'circuitId': instance.circuitId,
   'circuitName': instance.circuitName,
   'country': instance.country,
+  'locality': instance.locality,
+  'latitude': instance.latitude,
+  'longitude': instance.longitude,
   'fp1DateTime': instance.fp1DateTime.toIso8601String(),
   'fp2DateTime': instance.fp2DateTime?.toIso8601String(),
   'sprintDateTime': instance.sprintDateTime?.toIso8601String(),
