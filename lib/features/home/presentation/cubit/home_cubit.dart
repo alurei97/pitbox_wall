@@ -42,7 +42,7 @@ class HomeCubit extends Cubit<HomeState> {
           _ => <DriverStanding>[],
         };
         final topConstructors = switch (standingsResult) {
-          Right(value: final sr) => sr.constructorStandings.take(3).toList(growable: false),
+          Right(value: final sr) => sr.constructorStandings.take(5).toList(growable: false),
           _ => <ConstructorStanding>[],
         };
         final standingsCache = switch (standingsResult) {

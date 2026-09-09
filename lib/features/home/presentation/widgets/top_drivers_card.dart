@@ -20,9 +20,7 @@ class TopDrivers extends StatelessWidget {
       children: [
         Text(
           'DRIVER STANDINGS',
-          style: theme.textTheme.titleLarge?.copyWith(
-            color: theme.colorScheme.onPrimary.withValues(alpha: 0.5),
-          ),
+          style: theme.textTheme.titleLarge,
         ),
         for (var i = 0; i < drivers.length; i++) ...[
           _DriverStandingRow(standing: drivers[i], maxScore: drivers.first.points),
@@ -62,13 +60,11 @@ class _DriverStandingRow extends StatelessWidget {
           ),
 
           Container(
-            width: 14,
-            height: 14,
-            decoration: BoxDecoration(
-              color: teamColor,
-            ),
+            width: 6,
+            height: 26,
+            decoration: BoxDecoration(color: teamColor),
           ),
-          const SizedBox(width: 4),
+          const SizedBox(width: 6),
 
           Expanded(
             child: Text(
