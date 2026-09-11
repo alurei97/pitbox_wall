@@ -44,7 +44,7 @@ class _ConstructorStandingRow extends StatelessWidget {
 
     return GestureDetector(
       behavior: .opaque,
-      onTap: () => context.push('/constructor/${standing.constructorId}'),
+      onTap: () => context.push('/constructor/${standing.constructorId}', extra: standing),
       child: Row(
         crossAxisAlignment: .center,
         children: [

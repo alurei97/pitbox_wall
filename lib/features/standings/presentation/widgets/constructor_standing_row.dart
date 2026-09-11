@@ -27,7 +27,7 @@ class ConstructorStandingRow extends StatelessWidget {
 
     return GestureDetector(
       behavior: .opaque,
-      onTap: selecting ? onToggle : () => context.push('/constructor/${standing.constructorId}'),
+      onTap: selecting ? onToggle : () => context.push('/constructor/${standing.constructorId}', extra: standing),
       child: Padding(
         padding: const .symmetric(horizontal: 2, vertical: 12),
         child: Row(

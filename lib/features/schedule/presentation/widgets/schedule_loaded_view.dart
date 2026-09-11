@@ -101,10 +101,8 @@ class _ScheduleLoadedViewState extends State<ScheduleLoadedView> {
         : DateTime.now().year;
 
     // Find the first non-finished race round so we can attach the scroll key.
-    final nextRound = widget.races
-        .where((r) => r.statusAt(now) != RaceStatus.past)
-        .firstOrNull
-        ?.round;
+    final nonPast = widget.races.where((r) => r.statusAt(now) != RaceStatus.past);
+    final nextRound = nonPast.isEmpty ? null : nonPast.first.round;
 
     return Column(
       children: [

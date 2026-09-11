@@ -15,12 +15,12 @@ import '../cubit/driver_state.dart';
 class DriverPage extends StatefulWidget {
   const DriverPage({
     required this.id,
-    this.driver,
+    required this.driver,
     super.key,
   });
 
   final String id;
-  final DriverStanding? driver;
+  final DriverStanding driver;
 
   @override
   State<DriverPage> createState() => _DriverPageState();

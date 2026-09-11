@@ -28,7 +28,7 @@ class DriverStandingRow extends StatelessWidget {
 
     return GestureDetector(
       behavior: .opaque,
-      onTap: selecting ? onToggle : () => context.push('/driver/${standing.driverId}'),
+      onTap: selecting ? onToggle : () => context.push('/driver/${standing.driverId}', extra: standing),
       child: Padding(
         padding: const .symmetric(horizontal: 2, vertical: 12),
         child: Row(

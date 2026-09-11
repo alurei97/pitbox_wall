@@ -27,7 +27,7 @@ class DriverPointsChart extends StatelessWidget {
         children: [
           Text(
             'Season results',
-            style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
+            style: theme.textTheme.titleMedium,
           ),
           SizedBox(
             height: results.length * _barHeight,
@@ -82,11 +82,13 @@ class DriverPointsChart extends StatelessWidget {
                   bottomTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
-                      reservedSize: 40,
+                      reservedSize: 35,
                       getTitlesWidget: (value, meta) {
                         final round = value.round();
-                        final result = results.where((r) => r.round == round).firstOrNull;
+                        final matches = results.where((r) => r.round == round);
+                        final result = matches.isEmpty ? null : matches.first;
                         if (result == null) return const SizedBox.shrink();
+
                         return SideTitleWidget(
                           meta: meta,
                           child: Text(
@@ -104,8 +106,10 @@ class DriverPointsChart extends StatelessWidget {
                       reservedSize: 85,
                       getTitlesWidget: (value, meta) {
                         final round = value.round();
-                        final result = results.where((r) => r.round == round).firstOrNull;
+                        final matches = results.where((r) => r.round == round);
+                        final result = matches.isEmpty ? null : matches.first;
                         if (result == null) return const SizedBox.shrink();
+
                         return SideTitleWidget(
                           meta: meta,
                           child: Text(

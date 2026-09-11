@@ -6,21 +6,19 @@ import 'driver_header.dart';
 
 class DriverLoadingView extends StatelessWidget {
   const DriverLoadingView({
-    this.driver,
-    this.onBack,
+    required this.driver,
+    required this.onBack,
     super.key,
   });
 
-  /// Driver info passed from the navigation site, shown instantly while the
-  /// rest of the season data loads. Null when the page was opened without it.
-  final DriverStanding? driver;
-  final VoidCallback? onBack;
+  final DriverStanding driver;
+  final VoidCallback onBack;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        if (driver != null && onBack != null) DriverHeader(driver: driver!, onBack: onBack!),
+        DriverHeader(driver: driver, onBack: onBack),
         const Expanded(
           child: Center(
             child: DownloadingHistoryView(message: 'Fetching driver data...'),

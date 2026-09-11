@@ -21,9 +21,7 @@ class DriverHeader extends StatelessWidget {
 
     return Container(
       padding: const .fromLTRB(0, 16, 16, 16),
-      decoration: BoxDecoration(
-        color: teamColor.withValues(alpha: .14),
-      ),
+      decoration: BoxDecoration(color: teamColor.withValues(alpha: .14)),
       child: Row(
         crossAxisAlignment: .center,
         children: [
