@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -6,33 +8,69 @@ import '../cubit/home_state.dart';
 import '../../../../shared/utils/date_time_format.dart';
 
 /// Hero card for the next race, shown on the home screen.
-/// Shows a live countdown to the next session.
+/// Shows a live countdown that ticks every minute.
 /// Tappable — navigates to the race weekend page.
-class NextRaceHeroCard extends StatelessWidget {
+class NextRaceHeroCard extends StatefulWidget {
   const NextRaceHeroCard({required this.race, required this.sessions, super.key});
 
   final Race race;
   final List<SessionEntry> sessions;
 
   @override
+  State<NextRaceHeroCard> createState() => _NextRaceHeroCardState();
+}
+
+class _NextRaceHeroCardState extends State<NextRaceHeroCard> {
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _startTimer();
+  }
+
+  @override
+  void didUpdateWidget(covariant NextRaceHeroCard oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    // Sessions changed (e.g. after refresh) — reset the timer.
+    if (oldWidget.sessions != widget.sessions) {
+      _timer?.cancel();
+      _startTimer();
+    }
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  void _startTimer() {
+    // Tick every minute so the countdown stays fresh.
+    _timer = Timer.periodic(const Duration(minutes: 1), (_) {
+      if (mounted) setState(() {});
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-
     final now = DateTime.now();
 
     // Find next upcoming session
-    final upcoming = sessions.where((s) => s.dateTime.isAfter(now)).toList();
+    final upcoming = widget.sessions.where((s) => s.dateTime.isAfter(now)).toList();
     upcoming.sort((a, b) => a.dateTime.compareTo(b.dateTime));
     final next = upcoming.isEmpty ? null : upcoming.first;
 
     final countdown = next != null ? _countdown(next.dateTime, now) : '—';
 
-    final raceDate = race.raceDateTime.toLocal();
+    final raceDate = widget.race.raceDateTime.toLocal();
     final raceLabel = formatRaceDateTime(raceDate);
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap: () => context.push('/race/${race.round}', extra: race),
+      onTap: () => context.push('/race/${widget.race.round}', extra: widget.race),
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
