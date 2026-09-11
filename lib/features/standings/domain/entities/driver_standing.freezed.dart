@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$DriverStanding {
 
- int get position; double get points; int get wins; String get driverId; String? get driverCode; String get driverNumber; String get givenName; String get familyName; String get constructorId; String get constructorName;
+ int get position; double get points; int get wins; String get driverId; String? get driverCode; String get driverNumber; String get givenName; String get familyName; String get nationality; String get dateOfBirth; String get constructorId; String get constructorName;
 /// Create a copy of DriverStanding
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $DriverStandingCopyWith<DriverStanding> get copyWith => _$DriverStandingCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DriverStanding&&(identical(other.position, position) || other.position == position)&&(identical(other.points, points) || other.points == points)&&(identical(other.wins, wins) || other.wins == wins)&&(identical(other.driverId, driverId) || other.driverId == driverId)&&(identical(other.driverCode, driverCode) || other.driverCode == driverCode)&&(identical(other.driverNumber, driverNumber) || other.driverNumber == driverNumber)&&(identical(other.givenName, givenName) || other.givenName == givenName)&&(identical(other.familyName, familyName) || other.familyName == familyName)&&(identical(other.constructorId, constructorId) || other.constructorId == constructorId)&&(identical(other.constructorName, constructorName) || other.constructorName == constructorName));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DriverStanding&&(identical(other.position, position) || other.position == position)&&(identical(other.points, points) || other.points == points)&&(identical(other.wins, wins) || other.wins == wins)&&(identical(other.driverId, driverId) || other.driverId == driverId)&&(identical(other.driverCode, driverCode) || other.driverCode == driverCode)&&(identical(other.driverNumber, driverNumber) || other.driverNumber == driverNumber)&&(identical(other.givenName, givenName) || other.givenName == givenName)&&(identical(other.familyName, familyName) || other.familyName == familyName)&&(identical(other.nationality, nationality) || other.nationality == nationality)&&(identical(other.dateOfBirth, dateOfBirth) || other.dateOfBirth == dateOfBirth)&&(identical(other.constructorId, constructorId) || other.constructorId == constructorId)&&(identical(other.constructorName, constructorName) || other.constructorName == constructorName));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,position,points,wins,driverId,driverCode,driverNumber,givenName,familyName,constructorId,constructorName);
+int get hashCode => Object.hash(runtimeType,position,points,wins,driverId,driverCode,driverNumber,givenName,familyName,nationality,dateOfBirth,constructorId,constructorName);
 
 @override
 String toString() {
-  return 'DriverStanding(position: $position, points: $points, wins: $wins, driverId: $driverId, driverCode: $driverCode, driverNumber: $driverNumber, givenName: $givenName, familyName: $familyName, constructorId: $constructorId, constructorName: $constructorName)';
+  return 'DriverStanding(position: $position, points: $points, wins: $wins, driverId: $driverId, driverCode: $driverCode, driverNumber: $driverNumber, givenName: $givenName, familyName: $familyName, nationality: $nationality, dateOfBirth: $dateOfBirth, constructorId: $constructorId, constructorName: $constructorName)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $DriverStandingCopyWith<$Res>  {
   factory $DriverStandingCopyWith(DriverStanding value, $Res Function(DriverStanding) _then) = _$DriverStandingCopyWithImpl;
 @useResult
 $Res call({
- int position, double points, int wins, String driverId, String? driverCode, String driverNumber, String givenName, String familyName, String constructorId, String constructorName
+ int position, double points, int wins, String driverId, String? driverCode, String driverNumber, String givenName, String familyName, String nationality, String dateOfBirth, String constructorId, String constructorName
 });
 
 
@@ -66,7 +66,7 @@ class _$DriverStandingCopyWithImpl<$Res>
 
 /// Create a copy of DriverStanding
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? position = null,Object? points = null,Object? wins = null,Object? driverId = null,Object? driverCode = freezed,Object? driverNumber = null,Object? givenName = null,Object? familyName = null,Object? constructorId = null,Object? constructorName = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? position = null,Object? points = null,Object? wins = null,Object? driverId = null,Object? driverCode = freezed,Object? driverNumber = null,Object? givenName = null,Object? familyName = null,Object? nationality = null,Object? dateOfBirth = null,Object? constructorId = null,Object? constructorName = null,}) {
   return _then(DriverStanding(
 position: null == position ? _self.position : position // ignore: cast_nullable_to_non_nullable
 as int,points: null == points ? _self.points : points // ignore: cast_nullable_to_non_nullable
@@ -76,6 +76,8 @@ as String,driverCode: freezed == driverCode ? _self.driverCode : driverCode // i
 as String?,driverNumber: null == driverNumber ? _self.driverNumber : driverNumber // ignore: cast_nullable_to_non_nullable
 as String,givenName: null == givenName ? _self.givenName : givenName // ignore: cast_nullable_to_non_nullable
 as String,familyName: null == familyName ? _self.familyName : familyName // ignore: cast_nullable_to_non_nullable
+as String,nationality: null == nationality ? _self.nationality : nationality // ignore: cast_nullable_to_non_nullable
+as String,dateOfBirth: null == dateOfBirth ? _self.dateOfBirth : dateOfBirth // ignore: cast_nullable_to_non_nullable
 as String,constructorId: null == constructorId ? _self.constructorId : constructorId // ignore: cast_nullable_to_non_nullable
 as String,constructorName: null == constructorName ? _self.constructorName : constructorName // ignore: cast_nullable_to_non_nullable
 as String,
@@ -163,10 +165,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int position,  double points,  int wins,  String driverId,  String? driverCode,  String driverNumber,  String givenName,  String familyName,  String constructorId,  String constructorName)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int position,  double points,  int wins,  String driverId,  String? driverCode,  String driverNumber,  String givenName,  String familyName,  String nationality,  String dateOfBirth,  String constructorId,  String constructorName)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _DriverStanding() when $default != null:
-return $default(_that.position,_that.points,_that.wins,_that.driverId,_that.driverCode,_that.driverNumber,_that.givenName,_that.familyName,_that.constructorId,_that.constructorName);case _:
+return $default(_that.position,_that.points,_that.wins,_that.driverId,_that.driverCode,_that.driverNumber,_that.givenName,_that.familyName,_that.nationality,_that.dateOfBirth,_that.constructorId,_that.constructorName);case _:
   return orElse();
 
 }
@@ -184,10 +186,10 @@ return $default(_that.position,_that.points,_that.wins,_that.driverId,_that.driv
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int position,  double points,  int wins,  String driverId,  String? driverCode,  String driverNumber,  String givenName,  String familyName,  String constructorId,  String constructorName)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int position,  double points,  int wins,  String driverId,  String? driverCode,  String driverNumber,  String givenName,  String familyName,  String nationality,  String dateOfBirth,  String constructorId,  String constructorName)  $default,) {final _that = this;
 switch (_that) {
 case _DriverStanding():
-return $default(_that.position,_that.points,_that.wins,_that.driverId,_that.driverCode,_that.driverNumber,_that.givenName,_that.familyName,_that.constructorId,_that.constructorName);case _:
+return $default(_that.position,_that.points,_that.wins,_that.driverId,_that.driverCode,_that.driverNumber,_that.givenName,_that.familyName,_that.nationality,_that.dateOfBirth,_that.constructorId,_that.constructorName);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -204,10 +206,10 @@ return $default(_that.position,_that.points,_that.wins,_that.driverId,_that.driv
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int position,  double points,  int wins,  String driverId,  String? driverCode,  String driverNumber,  String givenName,  String familyName,  String constructorId,  String constructorName)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int position,  double points,  int wins,  String driverId,  String? driverCode,  String driverNumber,  String givenName,  String familyName,  String nationality,  String dateOfBirth,  String constructorId,  String constructorName)?  $default,) {final _that = this;
 switch (_that) {
 case _DriverStanding() when $default != null:
-return $default(_that.position,_that.points,_that.wins,_that.driverId,_that.driverCode,_that.driverNumber,_that.givenName,_that.familyName,_that.constructorId,_that.constructorName);case _:
+return $default(_that.position,_that.points,_that.wins,_that.driverId,_that.driverCode,_that.driverNumber,_that.givenName,_that.familyName,_that.nationality,_that.dateOfBirth,_that.constructorId,_that.constructorName);case _:
   return null;
 
 }
@@ -219,7 +221,7 @@ return $default(_that.position,_that.points,_that.wins,_that.driverId,_that.driv
 @JsonSerializable()
 
 class _DriverStanding implements DriverStanding {
-  const _DriverStanding({required this.position, required this.points, required this.wins, required this.driverId, this.driverCode, required this.driverNumber, required this.givenName, required this.familyName, required this.constructorId, required this.constructorName});
+  const _DriverStanding({required this.position, required this.points, required this.wins, required this.driverId, this.driverCode, required this.driverNumber, required this.givenName, required this.familyName, required this.nationality, required this.dateOfBirth, required this.constructorId, required this.constructorName});
   factory _DriverStanding.fromJson(Map<String, dynamic> json) => _$DriverStandingFromJson(json);
 
 @override final  int position;
@@ -230,6 +232,8 @@ class _DriverStanding implements DriverStanding {
 @override final  String driverNumber;
 @override final  String givenName;
 @override final  String familyName;
+@override final  String nationality;
+@override final  String dateOfBirth;
 @override final  String constructorId;
 @override final  String constructorName;
 
@@ -246,16 +250,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DriverStanding&&(identical(other.position, position) || other.position == position)&&(identical(other.points, points) || other.points == points)&&(identical(other.wins, wins) || other.wins == wins)&&(identical(other.driverId, driverId) || other.driverId == driverId)&&(identical(other.driverCode, driverCode) || other.driverCode == driverCode)&&(identical(other.driverNumber, driverNumber) || other.driverNumber == driverNumber)&&(identical(other.givenName, givenName) || other.givenName == givenName)&&(identical(other.familyName, familyName) || other.familyName == familyName)&&(identical(other.constructorId, constructorId) || other.constructorId == constructorId)&&(identical(other.constructorName, constructorName) || other.constructorName == constructorName));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DriverStanding&&(identical(other.position, position) || other.position == position)&&(identical(other.points, points) || other.points == points)&&(identical(other.wins, wins) || other.wins == wins)&&(identical(other.driverId, driverId) || other.driverId == driverId)&&(identical(other.driverCode, driverCode) || other.driverCode == driverCode)&&(identical(other.driverNumber, driverNumber) || other.driverNumber == driverNumber)&&(identical(other.givenName, givenName) || other.givenName == givenName)&&(identical(other.familyName, familyName) || other.familyName == familyName)&&(identical(other.nationality, nationality) || other.nationality == nationality)&&(identical(other.dateOfBirth, dateOfBirth) || other.dateOfBirth == dateOfBirth)&&(identical(other.constructorId, constructorId) || other.constructorId == constructorId)&&(identical(other.constructorName, constructorName) || other.constructorName == constructorName));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,position,points,wins,driverId,driverCode,driverNumber,givenName,familyName,constructorId,constructorName);
+int get hashCode => Object.hash(runtimeType,position,points,wins,driverId,driverCode,driverNumber,givenName,familyName,nationality,dateOfBirth,constructorId,constructorName);
 
 @override
 String toString() {
-  return 'DriverStanding(position: $position, points: $points, wins: $wins, driverId: $driverId, driverCode: $driverCode, driverNumber: $driverNumber, givenName: $givenName, familyName: $familyName, constructorId: $constructorId, constructorName: $constructorName)';
+  return 'DriverStanding(position: $position, points: $points, wins: $wins, driverId: $driverId, driverCode: $driverCode, driverNumber: $driverNumber, givenName: $givenName, familyName: $familyName, nationality: $nationality, dateOfBirth: $dateOfBirth, constructorId: $constructorId, constructorName: $constructorName)';
 }
 
 
@@ -266,7 +270,7 @@ abstract mixin class _$DriverStandingCopyWith<$Res> implements $DriverStandingCo
   factory _$DriverStandingCopyWith(_DriverStanding value, $Res Function(_DriverStanding) _then) = __$DriverStandingCopyWithImpl;
 @override @useResult
 $Res call({
- int position, double points, int wins, String driverId, String? driverCode, String driverNumber, String givenName, String familyName, String constructorId, String constructorName
+ int position, double points, int wins, String driverId, String? driverCode, String driverNumber, String givenName, String familyName, String nationality, String dateOfBirth, String constructorId, String constructorName
 });
 
 
@@ -283,7 +287,7 @@ class __$DriverStandingCopyWithImpl<$Res>
 
 /// Create a copy of DriverStanding
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? position = null,Object? points = null,Object? wins = null,Object? driverId = null,Object? driverCode = freezed,Object? driverNumber = null,Object? givenName = null,Object? familyName = null,Object? constructorId = null,Object? constructorName = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? position = null,Object? points = null,Object? wins = null,Object? driverId = null,Object? driverCode = freezed,Object? driverNumber = null,Object? givenName = null,Object? familyName = null,Object? nationality = null,Object? dateOfBirth = null,Object? constructorId = null,Object? constructorName = null,}) {
   return _then(_DriverStanding(
 position: null == position ? _self.position : position // ignore: cast_nullable_to_non_nullable
 as int,points: null == points ? _self.points : points // ignore: cast_nullable_to_non_nullable
@@ -293,6 +297,8 @@ as String,driverCode: freezed == driverCode ? _self.driverCode : driverCode // i
 as String?,driverNumber: null == driverNumber ? _self.driverNumber : driverNumber // ignore: cast_nullable_to_non_nullable
 as String,givenName: null == givenName ? _self.givenName : givenName // ignore: cast_nullable_to_non_nullable
 as String,familyName: null == familyName ? _self.familyName : familyName // ignore: cast_nullable_to_non_nullable
+as String,nationality: null == nationality ? _self.nationality : nationality // ignore: cast_nullable_to_non_nullable
+as String,dateOfBirth: null == dateOfBirth ? _self.dateOfBirth : dateOfBirth // ignore: cast_nullable_to_non_nullable
 as String,constructorId: null == constructorId ? _self.constructorId : constructorId // ignore: cast_nullable_to_non_nullable
 as String,constructorName: null == constructorName ? _self.constructorName : constructorName // ignore: cast_nullable_to_non_nullable
 as String,

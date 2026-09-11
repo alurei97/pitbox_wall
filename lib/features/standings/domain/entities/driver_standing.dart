@@ -14,6 +14,8 @@ abstract class DriverStanding with _$DriverStanding {
     required String driverNumber,
     required String givenName,
     required String familyName,
+    required String nationality,
+    required String dateOfBirth,
     required String constructorId,
     required String constructorName,
   }) = _DriverStanding;

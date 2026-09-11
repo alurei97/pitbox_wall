@@ -45,7 +45,7 @@ class _DriverStandingRow extends StatelessWidget {
 
     return GestureDetector(
       behavior: .opaque,
-      onTap: () => context.push('/driver/${standing.driverId}'),
+      onTap: () => context.push('/driver/${standing.driverId}', extra: standing),
       child: Row(
         crossAxisAlignment: .center,
         children: [

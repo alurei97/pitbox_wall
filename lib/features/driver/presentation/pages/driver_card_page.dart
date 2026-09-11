@@ -1,31 +1,92 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-/// Driver card — stats, season results, points chart.
-/// Full-screen route (outside the shell → no bottom nav, no appbar).
-class DriverCardPage extends StatelessWidget {
+import '../../../../core/di/di.dart';
+import '../../../../shared/widgets/error_retry_view.dart';
+import '../../../standings/domain/entities/driver_standing.dart';
+import '../widgets/driver_header.dart';
+import '../widgets/driver_loading_view.dart';
+import '../widgets/driver_points_chart.dart';
+import '../widgets/driver_stats.dart';
+import '../cubit/driver_cubit.dart';
+import '../cubit/driver_state.dart';
+
+/// Full-screen driver detail page: personal info, season info, race results...
+class DriverCardPage extends StatefulWidget {
+  const DriverCardPage({
+    required this.id,
+    this.driver,
+    super.key,
+  });
+
   final String id;
-
-  const DriverCardPage({required this.id, super.key});
+  final DriverStanding? driver;
 
   @override
+  State<DriverCardPage> createState() => _DriverCardPageState();
+}
+
+class _DriverCardPageState extends State<DriverCardPage> {
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          const Center(child: Text('Driver card — Phase 2')),
-          // Back affordance since this is a full-screen push with no appbar.
-          Positioned(
-            top: 0,
-            left: 0,
-            child: SafeArea(
-              child: IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: () => Navigator.of(context).pop(),
+    return BlocProvider(
+      create: (_) => getIt<DriverCubit>()..load(widget.id),
+      child: Scaffold(
+        body: SafeArea(
+          child: BlocBuilder<DriverCubit, DriverState>(
+            builder: (context, state) => state.when(
+              initial: () => _loadingView(context),
+              loading: () => _loadingView(context),
+              loaded: (data) => _DriverView(data: data),
+              error: (message) => ErrorRetryView(
+                title: "Can't load driver",
+                message: message,
+                onRetry: () => context.read<DriverCubit>().load(widget.id),
               ),
             ),
           ),
-        ],
+        ),
       ),
+    );
+  }
+
+  Widget _loadingView(BuildContext context) {
+    return DriverLoadingView(
+      driver: widget.driver,
+      onBack: () => Navigator.of(context).pop(),
+    );
+  }
+}
+
+class _DriverView extends StatelessWidget {
+  const _DriverView({required this.data});
+
+  final DriverData data;
+
+  @override
+  Widget build(BuildContext context) {
+    final driver = data.driver;
+    final results = data.raceResults;
+    final podiumCount = results.where((r) => r.position <= 3).length;
+    final dnfCount = results.where((r) => r.status != 'Finished').length;
+
+    return ListView(
+      padding: .zero,
+      children: [
+        DriverHeader(
+          driver: driver,
+          onBack: () => Navigator.of(context).pop(),
+        ),
+        DriverStats(
+          stats: [
+            ('WINS', driver.wins),
+            ('PODIUMS', podiumCount),
+            ('POLES', data.poles),
+            ('DNFS', dnfCount),
+          ],
+        ),
+        DriverPointsChart(results: results),
+      ],
     );
   }
 }

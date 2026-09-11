@@ -16,6 +16,8 @@ _DriverStanding _$DriverStandingFromJson(Map<String, dynamic> json) =>
       driverNumber: json['driverNumber'] as String,
       givenName: json['givenName'] as String,
       familyName: json['familyName'] as String,
+      nationality: json['nationality'] as String,
+      dateOfBirth: json['dateOfBirth'] as String,
       constructorId: json['constructorId'] as String,
       constructorName: json['constructorName'] as String,
     );
@@ -30,6 +32,8 @@ Map<String, dynamic> _$DriverStandingToJson(_DriverStanding instance) =>
       'driverNumber': instance.driverNumber,
       'givenName': instance.givenName,
       'familyName': instance.familyName,
+      'nationality': instance.nationality,
+      'dateOfBirth': instance.dateOfBirth,
       'constructorId': instance.constructorId,
       'constructorName': instance.constructorName,
     };

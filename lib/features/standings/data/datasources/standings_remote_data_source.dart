@@ -71,11 +71,14 @@ class StandingsRemoteDataSource {
     final givenName = driver['givenName']?.toString();
     final familyName = driver['familyName']?.toString();
     final driverNumber = driver['permanentNumber']?.toString();
+    final nationality = driver['nationality']?.toString();
+    final dateOfBirth = driver['dateOfBirth']?.toString();
     final constructorId = constructor['constructorId']?.toString();
     final constructorName = constructor['name']?.toString();
 
     if (driverId == null || givenName == null || familyName == null || driverNumber == null)
       return null;
+    if (nationality == null || dateOfBirth == null) return null;
     if (constructorId == null || constructorName == null) return null;
 
     return DriverStanding(
@@ -87,6 +90,8 @@ class StandingsRemoteDataSource {
       driverNumber: driverNumber,
       givenName: givenName,
       familyName: familyName,
+      nationality: nationality,
+      dateOfBirth: dateOfBirth,
       constructorId: constructorId,
       constructorName: constructorName,
     );

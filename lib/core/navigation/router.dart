@@ -8,6 +8,7 @@ import '../../features/home/presentation/pages/home_page.dart';
 import '../../features/results/presentation/pages/race_weekend_page.dart';
 import '../../features/schedule/domain/entities/race.dart';
 import '../../features/schedule/presentation/pages/schedule_page.dart';
+import '../../features/standings/domain/entities/driver_standing.dart';
 import '../../features/standings/presentation/pages/standings_page.dart';
 import '../../shared/widgets/app_scaffold.dart';
 
@@ -52,7 +53,10 @@ final router = GoRouter(
     ),
     GoRoute(
       path: '/driver/:id',
-      builder: (_, state) => DriverCardPage(id: state.pathParameters['id']!),
+      builder: (_, state) => DriverCardPage(
+        id: state.pathParameters['id']!,
+        driver: state.extra as DriverStanding?,
+      ),
     ),
     GoRoute(
       path: '/constructor/:id',

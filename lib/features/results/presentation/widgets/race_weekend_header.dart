@@ -55,7 +55,7 @@ class RaceWeekendHeader extends StatelessWidget {
           children: [
             Text(
               '${flagEmojiForCountry(race.country) ?? ''} ${race.circuitName} · ${race.country}',
-              style: textTheme.bodyMedium?.copyWith(color: grayColor), 
+              style: textTheme.bodyMedium?.copyWith(color: grayColor),
             ),
             Tooltip(
               message: 'Open circuit in Google Maps',
