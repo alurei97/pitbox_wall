@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/ai_assistant/presentation/pages/ai_page.dart';
-import '../../features/constructor/presentation/pages/constructor_card_page.dart';
-import '../../features/driver/presentation/pages/driver_card_page.dart';
+import '../../features/constructor/presentation/pages/constructor_page.dart';
+import '../../features/driver/presentation/pages/driver_page.dart';
 import '../../features/home/presentation/pages/home_page.dart';
 import '../../features/results/presentation/pages/race_weekend_page.dart';
 import '../../features/schedule/domain/entities/race.dart';
 import '../../features/schedule/presentation/pages/schedule_page.dart';
+import '../../features/standings/domain/entities/constructor_standing.dart';
 import '../../features/standings/domain/entities/driver_standing.dart';
 import '../../features/standings/presentation/pages/standings_page.dart';
 import '../../shared/widgets/app_scaffold.dart';
@@ -60,7 +61,10 @@ final router = GoRouter(
     ),
     GoRoute(
       path: '/constructor/:id',
-      builder: (_, state) => ConstructorCardPage(id: state.pathParameters['id']!),
+      builder: (_, state) => ConstructorPage(
+        id: state.pathParameters['id']!,
+        constructor: state.extra as ConstructorStanding,
+      ),
     ),
   ],
 );

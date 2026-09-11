@@ -26,10 +26,11 @@ class ConstructorCubit extends Cubit<ConstructorState> {
       emit(ConstructorState.error(message: failure.message));
       return;
     }
-    final standings = (standingsResult as Right<Failure, dynamic>).value;
-    final constructor = standings.constructorStandings
-        .where((item) => item.constructorId == constructorId)
-        .firstOrNull;
+    final StandingsResult standings = (standingsResult as Right<Failure, StandingsResult>).value;
+    final matches = standings.constructorStandings.where(
+      (item) => item.constructorId == constructorId,
+    );
+    final constructor = matches.isEmpty ? null : matches.first;
     if (constructor == null) {
       emit(const ConstructorState.error(message: 'Constructor not found.'));
       return;
@@ -40,7 +41,7 @@ class ConstructorCubit extends Cubit<ConstructorState> {
       emit(ConstructorState.error(message: failure.message));
       return;
     }
-    final schedule = (scheduleResult as Right<Failure, dynamic>).value;
+    final ScheduleResult schedule = (scheduleResult as Right<Failure, ScheduleResult>).value;
     final races = schedule.races;
     final completed = races.where((race) => race.raceDateTime.isBefore(DateTime.now())).length;
     final season = races.isEmpty ? DateTime.now().year : races.first.raceDateTime.toLocal().year;
@@ -53,7 +54,7 @@ class ConstructorCubit extends Cubit<ConstructorState> {
       emit(ConstructorState.error(message: failure.message));
       return;
     }
-    final seasonResults = (result as Right<Failure, dynamic>).value;
+    final ResultsResult seasonResults = (result as Right<Failure, ResultsResult>).value;
 
     emit(
       ConstructorState.loaded(
