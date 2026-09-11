@@ -18,15 +18,21 @@ class HomePage extends StatelessWidget {
       create: (_) => getIt<HomeCubit>()..load(),
       child: Scaffold(
         body: SafeArea(
-          child: BlocBuilder<HomeCubit, HomeState>(
-            builder: (context, state) => state.when(
-              initial: () => const HomeSkeleton(),
-              loading: () => const HomeSkeleton(),
-              loaded: (data) => HomeLoadedView(data: data),
-              error: (message) => ErrorRetryView(
-                title: "Can't load schedule",
-                message: message,
-                onRetry: () => context.read<HomeCubit>().load(forceRefresh: true),
+          child: RefreshIndicator(
+            onRefresh: () => getIt<HomeCubit>().load(forceRefresh: true),
+            child: BlocBuilder<HomeCubit, HomeState>(
+              builder: (context, state) => state.when(
+                initial: () => const HomeSkeleton(),
+                loading: () => const HomeSkeleton(),
+                loaded: (data) => SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: HomeLoadedView(data: data),
+                ),
+                error: (message) => ErrorRetryView(
+                  title: "Can't load schedule",
+                  message: message,
+                  onRetry: () => getIt<HomeCubit>().load(forceRefresh: true),
+                ),
               ),
             ),
           ),
