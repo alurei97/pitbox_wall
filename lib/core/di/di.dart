@@ -13,6 +13,7 @@ import '../../features/results/data/repositories/results_repository_impl.dart';
 import '../../features/results/domain/repositories/results_repository.dart';
 import '../../features/results/presentation/cubit/results_cubit.dart';
 import '../../features/driver/presentation/cubit/driver_cubit.dart';
+import '../../features/constructor/presentation/cubit/constructor_cubit.dart';
 import '../../features/standings/data/datasources/standings_remote_data_source.dart';
 import '../../features/standings/data/repositories/standings_repository_impl.dart';
 import '../../features/standings/domain/repositories/standings_repository.dart';
@@ -101,6 +102,13 @@ Future<void> configureDependencies() async {
   );
   getIt.registerFactory<DriverCubit>(
     () => DriverCubit(
+      getIt<StandingsRepository>(),
+      getIt<ScheduleRepository>(),
+      getIt<ResultsRepository>(),
+    ),
+  );
+  getIt.registerFactory<ConstructorCubit>(
+    () => ConstructorCubit(
       getIt<StandingsRepository>(),
       getIt<ScheduleRepository>(),
       getIt<ResultsRepository>(),
