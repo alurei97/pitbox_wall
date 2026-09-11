@@ -12,8 +12,8 @@ import '../cubit/driver_cubit.dart';
 import '../cubit/driver_state.dart';
 
 /// Full-screen driver detail page: personal info, season info, race results...
-class DriverCardPage extends StatefulWidget {
-  const DriverCardPage({
+class DriverPage extends StatefulWidget {
+  const DriverPage({
     required this.id,
     this.driver,
     super.key,
@@ -23,10 +23,10 @@ class DriverCardPage extends StatefulWidget {
   final DriverStanding? driver;
 
   @override
-  State<DriverCardPage> createState() => _DriverCardPageState();
+  State<DriverPage> createState() => _DriverPageState();
 }
 
-class _DriverCardPageState extends State<DriverCardPage> {
+class _DriverPageState extends State<DriverPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

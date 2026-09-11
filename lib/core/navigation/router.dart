@@ -53,7 +53,7 @@ final router = GoRouter(
     ),
     GoRoute(
       path: '/driver/:id',
-      builder: (_, state) => DriverCardPage(
+      builder: (_, state) => DriverPage(
         id: state.pathParameters['id']!,
         driver: state.extra as DriverStanding?,
       ),
