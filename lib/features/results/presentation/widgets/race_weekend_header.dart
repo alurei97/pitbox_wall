@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../core/di/di.dart';
 import '../../../schedule/domain/entities/race.dart';
+import '../../../../shared/models/track_metadata.dart';
 import '../../../../shared/utils/flags.dart';
 import '../../../../shared/widgets/status_chip.dart';
+import '../cubit/track_metadata_cubit.dart';
+import '../cubit/track_metadata_state.dart';
 
 class RaceWeekendHeader extends StatelessWidget {
   const RaceWeekendHeader({
@@ -69,7 +74,7 @@ class RaceWeekendHeader extends StatelessWidget {
           ],
         ),
 
-        if (_trackAsset(race.circuitId) != null) _TrackLayout(circuitId: race.circuitId!),
+        if (_trackAsset(race.circuitId) != null) _TrackInfo(circuitId: race.circuitId!),
       ],
     );
   }
@@ -115,22 +120,93 @@ String? _trackAsset(String? circuitId) {
   return assets[circuitId];
 }
 
+class _TrackInfo extends StatelessWidget {
+  const _TrackInfo({required this.circuitId});
+
+  final String circuitId;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => getIt<TrackMetadataCubit>(param1: circuitId)..load(),
+      child: BlocBuilder<TrackMetadataCubit, TrackMetadataState>(
+        builder: (context, state) => state.when(
+          initial: () => _buildLayout(context, null),
+          loading: () => _buildLayout(context, null),
+          loaded: (metadata) => _buildLayout(context, metadata),
+          error: (_) => _buildLayout(context, null),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLayout(BuildContext context, TrackMetadata? metadata) {
+    if (metadata == null) {
+      return _TrackLayout(circuitId: circuitId);
+    }
+
+    return Row(
+      children: [
+        _TrackLayout(circuitId: circuitId),
+        Column(
+          crossAxisAlignment: .start,
+          children: [
+            Padding(
+              padding: const .all(12),
+              child: Column(
+                crossAxisAlignment: .start,
+                children: [
+                  Text('KM', style: Theme.of(context).textTheme.labelSmall),
+                  Text(
+                    metadata.lengthKm.toStringAsFixed(3),
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const .all(12),
+              child: Column(
+                crossAxisAlignment: .start,
+                children: [
+                  Text('Laps', style: Theme.of(context).textTheme.labelSmall),
+                  Text(
+                    metadata.raceLaps.toString(),
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
 class _TrackLayout extends StatelessWidget {
   const _TrackLayout({required this.circuitId});
+
   final String circuitId;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Container(
-      width: double.infinity,
-      height: 120,
-      child: SvgPicture.asset(
-        'assets/tracks/${_trackAsset(circuitId)}.svg',
-        fit: BoxFit.contain,
-        colorFilter: .mode(theme.colorScheme.primary, .srcIn),
-        semanticsLabel: 'Circuit track layout',
-      ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final width = constraints.maxWidth.isFinite ? constraints.maxWidth : 200.0;
+        return SizedBox(
+          width: width,
+          height: 120,
+          child: SvgPicture.asset(
+            'assets/tracks/${_trackAsset(circuitId)}.svg',
+            fit: BoxFit.contain,
+            alignment: Alignment.center,
+            colorFilter: .mode(theme.colorScheme.primary, .srcIn),
+            semanticsLabel: 'Circuit track layout',
+          ),
+        );
+      },
     );
   }
 }

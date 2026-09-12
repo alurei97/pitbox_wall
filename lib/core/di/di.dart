@@ -12,6 +12,7 @@ import '../../features/results/data/datasources/results_remote_data_source.dart'
 import '../../features/results/data/repositories/results_repository_impl.dart';
 import '../../features/results/domain/repositories/results_repository.dart';
 import '../../features/results/presentation/cubit/results_cubit.dart';
+import '../../features/results/presentation/cubit/track_metadata_cubit.dart';
 import '../../features/driver/presentation/cubit/driver_cubit.dart';
 import '../../features/constructor/presentation/cubit/constructor_cubit.dart';
 import '../../features/standings/data/datasources/standings_remote_data_source.dart';
@@ -99,6 +100,9 @@ Future<void> configureDependencies() async {
   );
   getIt.registerFactory<ResultsCubit>(
     () => ResultsCubit(getIt<ResultsRepository>()),
+  );
+  getIt.registerFactoryParam<TrackMetadataCubit, String, void>(
+    (circuitId, _) => TrackMetadataCubit(circuitId),
   );
   getIt.registerFactory<DriverCubit>(
     () => DriverCubit(

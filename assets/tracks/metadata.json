@@ -1,0 +1,141 @@
+{
+  "albert_park": {
+    "lengthKm": 5.278,
+    "turns": 16,
+    "raceLaps": 58,
+    "raceDistanceKm": 306.124
+  },
+  "americas": {
+    "lengthKm": 5.513,
+    "turns": 20,
+    "raceLaps": 56,
+    "raceDistanceKm": 308.728
+  },
+  "bahrain": {
+    "lengthKm": 5.412,
+    "turns": 15,
+    "raceLaps": 57,
+    "raceDistanceKm": 308.238
+  },
+  "baku": {
+    "lengthKm": 6.003,
+    "turns": 20,
+    "raceLaps": 51,
+    "raceDistanceKm": 306.049
+  },
+  "catalunya": {
+    "lengthKm": 4.657,
+    "turns": 16,
+    "raceLaps": 66,
+    "raceDistanceKm": 307.236
+  },
+  "hungaroring": {
+    "lengthKm": 4.381,
+    "turns": 14,
+    "raceLaps": 70,
+    "raceDistanceKm": 306.63
+  },
+  "interlagos": {
+    "lengthKm": 4.309,
+    "turns": 15,
+    "raceLaps": 71,
+    "raceDistanceKm": 305.879
+  },
+  "jeddah": {
+    "lengthKm": 6.174,
+    "turns": 27,
+    "raceLaps": 50,
+    "raceDistanceKm": 308.7
+  },
+  "losail": {
+    "lengthKm": 5.419,
+    "turns": 16,
+    "raceLaps": 57,
+    "raceDistanceKm": 308.883
+  },
+  "marina_bay": {
+    "lengthKm": 4.94,
+    "turns": 23,
+    "raceLaps": 62,
+    "raceDistanceKm": 306.143
+  },
+  "miami": {
+    "lengthKm": 5.412,
+    "turns": 19,
+    "raceLaps": 57,
+    "raceDistanceKm": 308.326
+  },
+  "monaco": {
+    "lengthKm": 3.337,
+    "turns": 19,
+    "raceLaps": 78,
+    "raceDistanceKm": 260.286
+  },
+  "monza": {
+    "lengthKm": 5.793,
+    "turns": 11,
+    "raceLaps": 53,
+    "raceDistanceKm": 306.72
+  },
+  "red_bull_ring": {
+    "lengthKm": 4.318,
+    "turns": 10,
+    "raceLaps": 71,
+    "raceDistanceKm": 306.578
+  },
+  "rodriguez": {
+    "lengthKm": 4.304,
+    "turns": 17,
+    "raceLaps": 71,
+    "raceDistanceKm": 305.354
+  },
+  "shanghai": {
+    "lengthKm": 5.451,
+    "turns": 16,
+    "raceLaps": 56,
+    "raceDistanceKm": 305.066
+  },
+  "silverstone": {
+    "lengthKm": 5.891,
+    "turns": 18,
+    "raceLaps": 52,
+    "raceDistanceKm": 306.198
+  },
+  "spa": {
+    "lengthKm": 7.004,
+    "turns": 19,
+    "raceLaps": 44,
+    "raceDistanceKm": 308.052
+  },
+  "suzuka": {
+    "lengthKm": 5.807,
+    "turns": 18,
+    "raceLaps": 53,
+    "raceDistanceKm": 307.471
+  },
+  "vegas": {
+    "lengthKm": 6.201,
+    "turns": 17,
+    "raceLaps": 50,
+    "raceDistanceKm": 309.958
+  },
+  "villeneuve": {
+    "lengthKm": 4.361,
+    "turns": 14,
+    "raceLaps": 70,
+    "raceDistanceKm": 305.27
+  },
+  "yas_marina": {
+    "lengthKm": 5.281,
+    "turns": 16,
+    "raceLaps": 58,
+    "raceDistanceKm": 306.183
+  },
+  "zandvoort": {
+    "lengthKm": 4.259,
+    "turns": 14,
+    "raceLaps": 72,
+    "raceDistanceKm": 306.648
+  },
+  "_source": "Circuit guide facts compiled from public Formula 1 circuit guides and standard circuit references; race laps/distances follow the current Grand Prix layout. SVG keys follow MasterPlay007/F1-Track-Layouts-SVG (CC0 1.0)."
+}
