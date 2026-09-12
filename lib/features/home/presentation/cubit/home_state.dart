@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../../shared/models/cache_info.dart';
+import '../../../results/domain/entities/race_result.dart';
 import '../../../schedule/domain/entities/race.dart';
 import '../../../standings/domain/entities/constructor_standing.dart';
 import '../../../standings/domain/entities/driver_standing.dart';
@@ -25,6 +26,8 @@ class HomeData {
     this.topDrivers = const [],
     this.topConstructors = const [],
     this.standingsCache,
+    this.lastRace,
+    this.podium = const [],
   });
 
   /// The next upcoming or in-progress race (null = all races past).
@@ -50,6 +53,12 @@ class HomeData {
 
   /// Standings cache metadata, if standings were fetched.
   final CacheInfo? standingsCache;
+
+  /// The most recent race that has already finished, if any.
+  final Race? lastRace;
+
+  /// Top 3 finishers of [lastRace], ordered 1st → 3rd.
+  final List<RaceResult> podium;
 }
 
 @freezed

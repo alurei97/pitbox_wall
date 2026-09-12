@@ -12,8 +12,8 @@ class AppScaffold extends StatelessWidget {
       body: navigationShell,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: navigationShell.currentIndex,
-        selectedLabelStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w800),
-        unselectedLabelStyle: const TextStyle(fontSize: 10, fontWeight: FontWeight.w400),
+        selectedLabelStyle: const TextStyle(fontSize: 12, fontWeight: .w800),
+        unselectedLabelStyle: const TextStyle(fontSize: 10, fontWeight: .w400),
         selectedIconTheme: const IconThemeData(size: 28),
         unselectedIconTheme: const IconThemeData(size: 24),
         selectedFontSize: 12,

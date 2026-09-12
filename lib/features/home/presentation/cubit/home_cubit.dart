@@ -2,6 +2,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/error/either.dart';
 import '../../../../shared/models/cache_info.dart';
+import '../../../results/domain/entities/race_result.dart';
+import '../../../results/domain/repositories/results_repository.dart';
 import '../../../schedule/domain/entities/race.dart';
 import '../../../schedule/domain/repositories/schedule_repository.dart';
 import '../../../standings/domain/entities/constructor_standing.dart';
@@ -13,10 +15,12 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit(
     this._scheduleRepository,
     this._standingsRepository,
+    this._resultsRepository,
   ) : super(const HomeState.initial());
 
   final ScheduleRepository _scheduleRepository;
   final StandingsRepository _standingsRepository;
+  final ResultsRepository _resultsRepository;
 
   Future<void> load({bool forceRefresh = false}) async {
     emit(const HomeState.loading());
@@ -50,6 +54,10 @@ class HomeCubit extends Cubit<HomeState> {
           _ => null,
         };
 
+        // Fetch the last completed race's podium (non-blocking preview).
+        final lastRace = _findLastCompletedRace(races, now);
+        final podium = await _fetchPodium(lastRace);
+
         final old = scheduleResult.cache;
         emit(
           HomeState.loaded(
@@ -67,10 +75,43 @@ class HomeCubit extends Cubit<HomeState> {
               topDrivers: topDrivers,
               topConstructors: topConstructors,
               standingsCache: standingsCache,
+              lastRace: lastRace,
+              podium: podium,
             ),
           ),
         );
     }
+  }
+
+  /// Returns the most recent race that has already finished, or null if the
+  /// season hasn't produced any results yet.
+  Race? _findLastCompletedRace(List<Race> races, DateTime now) {
+    for (var i = races.length - 1; i >= 0; i--) {
+      if (races[i].statusAt(now) == RaceStatus.past) return races[i];
+    }
+    return null;
+  }
+
+  /// Fetches the top 3 finishers of [race] (main race only, not sprint).
+  Future<List<RaceResult>> _fetchPodium(Race? race) async {
+    if (race == null) return const [];
+
+    final result = await _resultsRepository.getRoundResults(
+      season: race.raceDateTime.toLocal().year,
+      round: race.round,
+    );
+
+    return switch (result) {
+      Right(value: final rr) => _topThree(rr.raceResults),
+      _ => const [],
+    };
+  }
+
+  /// Sorts race results by finishing position and keeps the top 3.
+  List<RaceResult> _topThree(List<RaceResult> results) {
+    final raceResults = results.where((r) => r.sessionType == 'race').toList(growable: false)
+      ..sort((a, b) => a.position.compareTo(b.position));
+    return raceResults.take(3).toList(growable: false);
   }
 
   /// Returns the first race that isn't finished yet, or the most recent past

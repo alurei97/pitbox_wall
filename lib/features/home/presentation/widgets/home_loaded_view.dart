@@ -4,6 +4,7 @@ import '../../../../shared/debug/debug_flags.dart';
 import '../../../../shared/widgets/cache_info_banner.dart';
 import '../cubit/home_state.dart';
 import 'next_race_hero_card.dart';
+import 'last_race_podium.dart';
 import 'race_week_badge.dart';
 import 'top_constructors_card.dart';
 import 'top_drivers_card.dart';
@@ -93,7 +94,6 @@ class HomeLoadedView extends StatelessWidget {
 
         // ── Top 5 drivers ──
         if (data.topDrivers.isNotEmpty) ...[
-          const SizedBox(height: 24),
           Padding(
             padding: const .symmetric(horizontal: 16),
             child: TopDrivers(drivers: data.topDrivers),
@@ -106,6 +106,15 @@ class HomeLoadedView extends StatelessWidget {
           Padding(
             padding: const .symmetric(horizontal: 16),
             child: TopConstructors(constructors: data.topConstructors),
+          ),
+        ],
+
+        // ── Last race podium ──
+        if (data.lastRace != null && data.podium.isNotEmpty) ...[
+          const SizedBox(height: 24),
+          Padding(
+            padding: const .symmetric(horizontal: 16),
+            child: LastRacePodium(race: data.lastRace!, podium: data.podium),
           ),
         ],
       ],

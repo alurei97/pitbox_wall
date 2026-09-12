@@ -61,6 +61,7 @@ Future<void> configureDependencies() async {
     () => HomeCubit(
       getIt<ScheduleRepository>(),
       getIt<StandingsRepository>(),
+      getIt<ResultsRepository>(),
     ),
   );
 
