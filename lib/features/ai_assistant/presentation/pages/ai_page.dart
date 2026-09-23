@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/di/di.dart';
 import '../../domain/ai_assistant_service.dart';
-import '../widgets/widgets.dart';
+import '../widgets/ai_header.dart';
+import '../widgets/chat_bubble.dart';
+import '../widgets/chat_message.dart';
+import '../widgets/composer.dart';
+import '../widgets/empty_conversation.dart';
+import '../widgets/thinking_bubble.dart';
 
 /// Pitbox AI — chat assistant.
 class AiPage extends StatelessWidget {
