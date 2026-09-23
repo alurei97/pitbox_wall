@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'core/di/di.dart';
@@ -7,7 +8,7 @@ import 'shared/theme/app_theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // TODO(Phase 4): await dotenv.load(fileName: '.env', isOptional: true);
+  await dotenv.load(fileName: '.env', isOptional: true);
   await configureDependencies();
   runApp(const ProviderScope(child: PitboxWallApp()));
 }

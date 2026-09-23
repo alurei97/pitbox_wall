@@ -1,8 +1,11 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 
 import '../db/app_database.dart';
 import '../network/dio_factory.dart';
+import '../../features/ai_assistant/data/groq_ai_assistant_service.dart';
+import '../../features/ai_assistant/domain/ai_assistant_service.dart';
 import '../../features/schedule/data/datasources/schedule_remote_data_source.dart';
 import '../../features/schedule/data/repositories/schedule_repository_impl.dart';
 import '../../features/schedule/domain/repositories/schedule_repository.dart';
@@ -29,7 +32,7 @@ Future<void> configureDependencies() async {
   // Database
   getIt.registerLazySingleton<AppDatabase>(() => AppDatabase());
 
-  // HTTP clients (named — two Dio instances)
+  // HTTP clients
   final dioFactory = DioFactory();
   getIt.registerLazySingleton<Dio>(
     () => dioFactory.jolpica(),
@@ -38,6 +41,10 @@ Future<void> configureDependencies() async {
   getIt.registerLazySingleton<Dio>(
     () => dioFactory.openF1(),
     instanceName: DioFactory.openF1Name,
+  );
+  getIt.registerLazySingleton<Dio>(
+    () => dioFactory.groq(),
+    instanceName: DioFactory.groqName,
   );
 
   // Schedule feature
@@ -117,6 +124,17 @@ Future<void> configureDependencies() async {
       getIt<StandingsRepository>(),
       getIt<ScheduleRepository>(),
       getIt<ResultsRepository>(),
+    ),
+  );
+
+  // AI assistant
+  getIt.registerLazySingleton<AiAssistantService>(
+    () => GroqAiAssistantService(
+      scheduleRepository: getIt<ScheduleRepository>(),
+      standingsRepository: getIt<StandingsRepository>(),
+      resultsRepository: getIt<ResultsRepository>(),
+      apiKey: dotenv.env['GROQ_API_KEY'] ?? '',
+      dio: getIt<Dio>(instanceName: DioFactory.groqName),
     ),
   );
 }
