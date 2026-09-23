@@ -115,7 +115,7 @@ class _StandingsLoadedViewState extends State<StandingsLoadedView> {
                     ),
                   )
                 : ListView.separated(
-                    padding: const .fromLTRB(16, 8, 16, 16),
+                    padding: const .fromLTRB(16, 0, 16, 16),
                     itemCount: data.constructors.length,
                     separatorBuilder: (_, _) => const ListDivider(),
                     itemBuilder: (context, index) => ConstructorStandingRow(
