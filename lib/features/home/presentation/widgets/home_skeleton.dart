@@ -12,21 +12,21 @@ class HomeSkeleton extends StatelessWidget {
         crossAxisAlignment: .start,
         children: [
           // ── Season header ──
-           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
             child: Row(
               mainAxisAlignment: .center,
               children: [
                 Column(
                   crossAxisAlignment: .start,
                   children: [
-                    const Bone.text(width: 160, fontSize: 30),
-                    const SizedBox(height: 4),
-                    const Bone.text(width: 120, fontSize: 14),
+                    Bone.text(width: 160, fontSize: 30),
+                    SizedBox(height: 4),
+                    Bone.text(width: 120, fontSize: 14),
                   ],
                 ),
-                const Spacer(),
-                const Bone.text(width: 80, fontSize: 12),
+                Spacer(),
+                Bone.text(width: 80, fontSize: 12),
               ],
             ),
           ),
