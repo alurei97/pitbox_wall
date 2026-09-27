@@ -1,7 +1,7 @@
 name: pitbox_wall
 description: "Pitbox Wall — F1 race companion: standings, bump chart, race results, and an AI assistant."
 publish_to: "none"
-version: 0.1.0+1
+version: 0.1.0+2
 
 environment:
   sdk: ^3.12.2
@@ -18,14 +18,17 @@ dependencies:
   flutter_bloc: ^9.1.1
   flutter_dotenv: ^6.0.1
   flutter_riverpod: ^2.6.1
+  flutter_svg: ^2.2.1
   freezed_annotation: ^3.1.0
   get_it: ^9.2.1
   go_router: ^17.3.0
   google_fonts: ^8.2.0
   json_annotation: ^4.12.0
+  markdown: ^7.2.0
   path_provider: ^2.1.6
   retrofit: ^4.9.2
   skeletonizer: ^2.1.3
+  url_launcher: ^6.3.2
 
 dev_dependencies:
   flutter_test:
