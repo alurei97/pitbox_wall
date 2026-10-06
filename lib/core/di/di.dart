@@ -39,10 +39,6 @@ Future<void> configureDependencies() async {
     instanceName: DioFactory.jolpicaName,
   );
   getIt.registerLazySingleton<Dio>(
-    () => dioFactory.openF1(),
-    instanceName: DioFactory.openF1Name,
-  );
-  getIt.registerLazySingleton<Dio>(
     () => dioFactory.groq(),
     instanceName: DioFactory.groqName,
   );
